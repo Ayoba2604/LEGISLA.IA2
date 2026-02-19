@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "titulo": "Princípios Fundamentais",
+    "descricao": "A República Federativa do Brasil constitui-se em Estado Democrático de Direito...",
+    "analise": "Estabelece os fundamentos básicos do Estado brasileiro, como soberania, cidadania e dignidade da pessoa humana.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 2,
+    "titulo": "Objetivos Fundamentais",
+    "descricao": "Constituem objetivos fundamentais da República Federativa do Brasil: construir uma sociedade livre, justa e solidária...",
+    "analise": "Define os principais objetivos do Brasil como nação.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 3,
+    "titulo": "Direitos Fundamentais",
+    "descricao": "Todos são iguais perante a lei, sem distinção de qualquer natureza, garantindo-se aos brasileiros e aos estrangeiros residentes no País a inviolabilidade do direito à vida, à liberdade, à igualdade, à segurança e à propriedade.",
+    "analise": "Este artigo garante que todas as pessoas sejam tratadas igualmente perante a lei, protegendo direitos essenciais como vida, liberdade e propriedade.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 4,
+    "titulo": "Direitos Sociais",
+    "descricao": "São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância, a assistência aos desamparados.",
+    "analise": "Este artigo enumera os direitos sociais assegurados a todos os cidadãos, como saúde, educação e moradia.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 5,
+    "titulo": "Direitos Trabalhistas",
+    "descricao": "São direitos dos trabalhadores urbanos e rurais, além de outros que visem à melhoria de sua condição social: salário mínimo, jornada de trabalho, repouso semanal, férias remuneradas, entre outros.",
+    "analise": "Este artigo estabelece direitos básicos dos trabalhadores, como salário justo e condições dignas de trabalho.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 6,
+    "titulo": "Princípios da Ordem Econômica",
+    "descricao": "A ordem econômica, fundada na valorização do trabalho humano e na livre iniciativa, tem por fim assegurar a todos existência digna, conforme os ditames da justiça social.",
+    "analise": "Define que a economia brasileira deve valorizar o trabalho e garantir uma existência digna para todos, orientada pela justiça social.",
+    "tipo": "base_juridica"
+  },
+  {
+    "id": 7,
+    "titulo": "Meio Ambiente",
+    "descricao": "Todos têm direito ao meio ambiente ecologicamente equilibrado, bem de uso comum do povo e essencial à sadia qualidade de vida.",
+    "analise": "Garante o direito de todos a um meio ambiente equilibrado, e impõe deveres ao Estado e à sociedade de preservá-lo.",
+    "tipo": "base_juridica"
+  }
+]

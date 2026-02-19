@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "titulo": "Demissão sem justa causa",
+    "descricao": "Situação de demissão sem justa causa",
+    "analise": "O trabalhador tem direito ao aviso prévio, férias proporcionais, 13º salário proporcional e seguro-desemprego, conforme a legislação trabalhista brasileira.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 2,
+    "titulo": "Atraso no pagamento do aluguel",
+    "descricao": "O locatário atrasou o pagamento do aluguel",
+    "analise": "O locatário pode ser cobrado multa contratual, juros e correção monetária; o locador pode ingressar com ação de despejo após notificação.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 3,
+    "titulo": "Divórcio consensual sem filhos",
+    "descricao": "Divórcio consensual sem filhos menores",
+    "analise": "O divórcio pode ser feito extrajudicialmente, com acordo mútuo, sem necessidade de audiência judicial.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 4,
+    "titulo": "Compra de imóvel financiado",
+    "descricao": "Compra de imóvel com financiamento",
+    "analise": "O comprador deve verificar cláusulas do financiamento, como taxas de juros, prazos e condições de quitação antecipada.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 5,
+    "titulo": "Acidente de trabalho",
+    "descricao": "Reclamação por acidente de trabalho",
+    "analise": "O trabalhador tem direito à estabilidade de 12 meses após retorno, auxílio-doença e possível indenização.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 6,
+    "titulo": "Cobrança indevida",
+    "descricao": "Cobrança indevida por serviço não contratado",
+    "analise": "O consumidor pode exigir cancelamento da cobrança, ressarcimento, registrar reclamação no PROCON e buscar reparação judicial por danos morais.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 7,
+    "titulo": "Herança sem testamento",
+    "descricao": "Herança sem testamento",
+    "analise": "Os bens do falecido serão divididos conforme a ordem legal de sucessão, beneficiando cônjuge, descendentes e ascendentes, de acordo com o Código Civil.",
+    "tipo": "situacao"
+  },
+  {
+    "id": 8,
+    "titulo": "Negociação de dívida",
+    "descricao": "Negociação de dívida com banco",
+    "analise": "O devedor pode buscar acordos para redução de juros e parcelamento, formalizando tudo por escrito para evitar cobranças abusivas.",
+    "tipo": "situacao"
+  }
+]

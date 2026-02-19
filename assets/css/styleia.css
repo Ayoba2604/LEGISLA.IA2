@@ -1,0 +1,215 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0d1117;
+  height: 100vh;
+  display: flex;
+}
+
+/* =============== SIDEBAR =============== */
+
+#sidebar {
+  width: 270px;
+  background: #11151a;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  padding: 20px;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.25s ease;
+}
+
+#sidebar.closed {
+  transform: translateX(-270px);
+}
+
+#sidebar h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #9ab;
+}
+
+#sidebar button,
+#sidebar a {
+  width: 100%;
+  padding: 12px;
+  background: #21262d;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #e6edf3;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  transition: 0.2s ease;
+}
+
+#sidebar button:hover,
+#sidebar a:hover {
+  background: #30363d;
+}
+
+/* Ícone de fechar */
+.close-btn {
+  background: #5b8def;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.close-btn:hover {
+  background: #4679dd;
+}
+
+/* Botão flutuante para abrir sidebar */
+.floating-btn {
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  background: #21262d;
+  border: 1px solid rgba(255,255,255,0.08);
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+  display: none;
+}
+
+/* Mostrar botão quando sidebar está fechada */
+#sidebar.closed ~ .floating-btn,
+.floating-btn:not(.hidden) {
+  display: block;
+}
+
+/* =============== CHAT =============== */
+
+#imgIa {
+  flex-grow: 1;
+  margin: auto;
+  width: 70%;
+  max-width: 1200px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+#chat-container {
+  flex-grow: 1;
+  margin: auto;
+  width: 70%;
+  max-width: 1200px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+#messages {
+  flex-grow: 1;
+  padding: 28px;
+  overflow-y: auto;
+  background: #0d1117;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  max-width: 75%;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Usuário à direita */
+.user-message {
+  background: #5b8def;
+  color: #fff;
+  align-self: flex-end;
+  border-radius: 16px 16px 4px 16px;
+}
+
+/* IA à esquerda */
+.bot-message {
+  background: #21262d;
+  color: #d1d5da;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px 16px 16px 4px;
+  align-self: flex-start;
+}
+
+#input-area {
+  padding: 16px 20px;
+  background: #161b22;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#input-text {
+  flex: 1;
+  border: none;
+  background: #21262d;
+  color: #e6edf3;
+  border-radius: 50px;
+  padding: 14px 20px;
+  font-size: 16px;
+}
+
+button, .icon-btn {
+  background: #5b8def;
+  border: none;
+  color: #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Corrige alinhamento vertical */
+  padding: 0;
+  line-height: 0;
+}
+
+
+button:hover,
+.icon-btn:hover {
+  background: #4679dd;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* ===============================
+   RESET / BASE
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===============================
+   TEMAS
+================================ */
+:root[data-theme="light"] {
+  --bg-gradient: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-muted: #f0f0f0;
+
+  --container-bg: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #f0f0f0;
+
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-color: #111827;
+
+  --border-color: #d1d5db;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  --btn-bg: #2563eb;
+  --btn-hover: #1d4ed8;
+  --btn-text: #ffffff;
+
+  --link-color: #2563eb;
+  --icon-color: #2563eb;
+}
+
+:root[data-theme="dark"] {
+  --bg-gradient: linear-gradient(90deg, #474747, #482d54);
+  --bg-primary: #1f1f1f;
+  --bg-secondary: #2a2a2a;
+  --bg-muted: #3a3a3a;
+
+  --container-bg: #2e2e2e;
+  --card-bg: #2e2e2e;
+  --input-bg: #3a3a3a;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-color: #f9fafb;
+
+  --border-color: #4b5563;
+
+  --primary: #0fbcf9;
+  --primary-hover: #0aaedc;
+
+  --btn-bg: #0fbcf9;
+  --btn-hover: #0aaedc;
+  --btn-text: #000000;
+
+  --link-color: #0fbcf9;
+  --icon-color: #0fbcf9;
+}
+
+/* ===============================
+   GERAL
+================================ */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+/* ===============================
+   HEADER / NAV
+================================ */
+header {
+  background: transparent;
+  padding: 10px 40px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+  display: flex;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--primary-hover);
+}
+
+/* ===============================
+   LOGO
+================================ */
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 48px;
+}
+
+.logo span {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===============================
+   HERO / INTRODUÇÃO
+================================ */
+.hero {
+  padding: 90px 10%;
+}
+
+.Introducao {
+  max-width: 700px;
+}
+
+.Introducao h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.Introducao p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===============================
+   BOTÕES
+================================ */
+.hero-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn.primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn.outline {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+/* ===============================
+   SOBRE NÓS
+================================ */
+.sobre-nos {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--bg-primary);
+}
+
+.colaboradores {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.colaborador {
+  text-align: center;
+  max-width: 200px;
+}
+
+.colaborador img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.colaborador p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* ===============================
+   CADASTRO
+================================ */
+.cadastro-div {
+  background-color: var(--bg-secondary);
+  width: 400px;
+  padding: 30px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ===============================
+   PERGUNTA
+================================ */
+.question-box {
+  background: var(--bg-muted);
+  padding: 60px 10%;
+  text-align: center;
+}
+
+.question-box h2 {
+  font-size: 28px;
+}
+
+.question-box p {
+  margin: 10px 0 25px;
+  color: var(--text-secondary);
+}
+
+.question-box form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.question-box input {
+  width: 80%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.question-box button {
+  padding: 12px 20px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===============================
+   FUNCIONALIDADES
+================================ */
+.features {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  width: 260px;
+}
+
+.card i {
+  font-size: 34px;
+  color: var(--icon-color);
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   PÚBLICO
+================================ */
+.publico {
+  padding: 60px 10%;
+  background: var(--bg-secondary);
+}
+
+.publico ul {
+  list-style: none;
+}
+
+.publico li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  margin: 12px 0;
+}
+
+.publico i {
+  font-size: 22px;
+  color: var(--icon-color);
+}
+
+/*CONTAINER E FORMULÁRIO*/
+
+.container {
+  position: relative;
+  width: 850px;
+  height: 550px;
+  background: var(--container-bg);
+  margin: 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+  overflow: hidden;
+  transition: background 0.4s;
+}
+
+.container h1 {
+  font-size: 36px;
+  margin: 10px 0;
+}
+
+.form-box {
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box {
+  position: relative;
+  margin: 20px 0;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 15px 45px 15px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 16px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.input-box i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--icon-color);
+}
+
+.btn {
+  padding: 15px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.forgout-link {
+  text-align: right;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.forgout-link a {
+  color: var(--link-color);
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+/* ===============================
+   SWITCH DE TEMA (ALINHADO AO JS)
+================================ */
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.mudar.tema {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 30px;
+}
+
+/* esconde checkbox */
+.mudar.tema input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* trilho */
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #e5e7eb; /* light */
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* bolinha */
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 3px;
+  top: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* ícone (LIGHT = sol) */
+.slider::after {
+  content: "☀️";
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* ===============================
+   DARK MODE (checked)
+================================ */
+.mudar.tema input:checked + .slider {
+  background-color: #1f2933; /* dark neutro */
+}
+
+.mudar.tema input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+.mudar.tema input:checked + .slider::after {
+  content: "🌙";
+  right: 5px;
+  left: auto;
+}
+
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 10px 20px;
+  }
+
+  .nav {
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .Introducao h1 {
+    font-size: 32px;
+  }
+
+  .Introducao p {
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .form-box {
+    padding: 30px 20px;
+  }
+
+  .question-box {
+    padding: 40px 20px;
+  }
+
+  .question-box form {
+    flex-direction: column;
+  }
+
+  .question-box input {
+    width: 100%;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cadastro-div {
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero,
+  .features,
+  .publico {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
