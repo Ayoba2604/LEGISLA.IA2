@@ -19,7 +19,7 @@ if ($url !== '/index.php') {
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
 
@@ -28,40 +28,15 @@ if ($url !== '/index.php') {
         <li class="nav-item">
             <a class="nav-link" href="index.php">Home</a>
         </li>
-
-        <?php if (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true && !empty($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
-            <!-- Botões visíveis apenas para admin -->
-            <li class="nav-item">
-                <a class="nav-link" href="../app/views/auth/centralDeControle.php">Central de Controle</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?route=consultas/logout">Sair</a>
-            </li>
-
-        <?php elseif (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true): ?>
-            <!-- Botões visíveis apenas para usuários logados -->
-            <li class="nav-item">
-                <a class="nav-link" href="../app/views/auth/perfil.php">Perfil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?route=consultas/logout">Sair</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../app/views/static/teste.html">IA</a>
-            </li>
-
-        <?php else: ?>
-            <!-- Botões para quem NÃO está logado -->
-            <li class="nav-item">
-                <a class="nav-link" href="../app/views/auth/formLogin.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../app/views/auth/formCadastro.php">Cadastro</a>
-            </li>
-        <?php endif; ?>
-
         <li class="nav-item">
             <a class="nav-link" href="../app/views/static/sobrenos.php">Sobre Nós</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="../app/views/auth/centralDeControle.php">Central de Controle</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php?route=consultas/logout">Sair</a>
         </li>
     </ul>
 </header>
@@ -123,11 +98,7 @@ if ($url !== '/index.php') {
         <p>Digite sua pergunta e receba uma explicação simples.</p>
 
         <form action="../app/views/static/teste.html" method="GET">
-            <input 
-                type="text" 
-                placeholder="Ex: Posso faltar ao trabalho com atestado?"
-                required
-            >
+            <input type="text" placeholder="Ex: Posso faltar ao trabalho com atestado?" required>
             <button type="submit">
                 <i class="bi bi-search"></i> Perguntar
             </button>
