@@ -96,10 +96,10 @@ if (isset($_SESSION['status_message']))
 </head>
 <body>
 
-    <header>
-        <h1>Painel de Administração de Usuários</h1>
-        <p>Bem-vindo, Administrador! <a href="logout.php">Sair</a></p>
-    </header>
+    <?php
+$currentView = 'central';
+require_once __DIR__ . '/../static/nav_view.php';
+?>
     
     <?php if (!empty($status_message)): ?>
         <div class="message"><?php echo htmlspecialchars($status_message); ?></div>
@@ -163,5 +163,7 @@ if (isset($_SESSION['status_message']))
         </tbody>
     </table>
 
+    <script src="../../../public/JS/Storage.js"></script>
+    <script src="../../../public/JS/themeMenu.js"></script>
 </body>
 </html>

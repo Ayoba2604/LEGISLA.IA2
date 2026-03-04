@@ -1,10 +1,15 @@
-<?php
+﻿<?php
 session_start();
 require_once "../routes/routesUsuarios.php";
 
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$route = $_POST['route'] ?? $_GET['route'] ?? '';
+$method = $_SERVER['REQUEST_METHOD'];
 
-if ($url !== '/index.php') { 
+$shouldHandleRoute =
+    ($method === 'POST' && in_array($route, ['consultas/login', 'consultas/cadastrar'], true)) ||
+    ($method === 'GET' && $route === 'consultas/logout');
+
+if ($shouldHandleRoute) {
     handleRoute();
 }
 ?>
@@ -21,32 +26,53 @@ if ($url !== '/index.php') {
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico">
 </head>
-<body>
+<body class="home-page">
 
-<header>
-    <ul class="nav">
+<header class="site-header">
+    <div class="nav-shell">
+    <a class="nav-brand" href="index.php">Legisla.IA</a>
+    <ul class="nav nav-list">
         <li class="nav-item">
             <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="../app/views/static/sobrenos.php">Sobre Nós</a>
         </li>
-        
-        <li class="nav-item">
-            <a class="nav-link" href="../app/views/auth/centralDeControle.php">Central de Controle</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?route=consultas/logout">Sair</a>
+
+        <?php if (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true): ?>
+            <?php if (!empty($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../app/views/auth/centralDeControle.php">Central de Controle</a>
+                </li>
+            <?php endif; ?>
+
+            <li class="nav-item">
+                <a class="nav-link nav-link-cta" href="index.php?route=consultas/logout">Sair</a>
+            </li>
+        <?php else: ?>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="../app/views/auth/formLogin.php">Entrar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../app/views/auth/formCadastro.php">Cadastro</a>
+            </li> -->
+        <?php endif; ?>
+
+        <li class="nav-item theme-nav-item">
+            <details class="theme-details" id="theme-details">
+                <summary class="nav-link theme-summary">
+                    Tema <span class="chevron" aria-hidden="true">▾</span>
+                </summary>
+                <div class="theme-menu" id="theme-menu">
+                    <button type="button" class="theme-option" data-theme="light">Claro</button>
+                    <button type="button" class="theme-option" data-theme="dark">Escuro</button>
+                </div>
+            </details>
+            <input type="checkbox" id="toggle-theme" hidden>
         </li>
     </ul>
+    </div>
 </header>
-    
-<div class="theme-switch">
-    <label class="mudar tema">
-        <input type="checkbox" id="toggle-theme">
-        <span class="slider"></span>
-    </label>
-</div>
 
 <!-- <main> 
     <div class="Introducao" >
@@ -60,7 +86,7 @@ if ($url !== '/index.php') {
 
     <?php //if (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true && $_SESSION['admin'] === false): ?>
         <div style="margin-top:20px;">
-            <a href="../app/views/static/teste.html" class="btn btn-primary">Try on Legisla.IA</a>
+            <a href="../app/views/static/ia_chat.html" class="btn btn-primary">Try on Legisla.IA</a>
         </div>
     <?php //endif; ?>
 </main> -->
@@ -84,25 +110,38 @@ if ($url !== '/index.php') {
                         <i class="bi bi-box-arrow-in-right"></i> Entrar
                     </a>
                 <?php else: ?>
-                    <a href="../app/views/static/teste.html" class="btn primary">
+                    <a href="../app/views/static/ia_chat.html" class="btn primary">
                         <i class="bi bi-chat-dots"></i> Tirar uma dúvida agora
                     </a>
                 <?php endif; ?>
             </div>
         </div>
     </section>
+    <!-- IA EM DESTAQUE -->
+    <section class="ai-showcase">
+        <div class="ai-showcase-head">
+            <span class="ai-badge"><i class="bi bi-stars"></i> IA Juridica ao vivo</span>
+            <h2>Converse com a Legisla.IA e receba orientacao em segundos</h2>
+            <p>Pergunte sobre direitos, deveres e situacoes do dia a dia com linguagem simples.</p>
+        </div>
 
-    <!-- PERGUNTA -->
-    <section class="question-box">
-        <h2>Qual é sua dúvida jurídica?</h2>
-        <p>Digite sua pergunta e receba uma explicação simples.</p>
+        <div class="ai-showcase-grid">
+            <a href="../app/views/static/ia_chat.html?q=Posso%20faltar%20ao%20trabalho%20com%20atestado%3F" class="ai-chip">
+                <i class="bi bi-briefcase"></i> Trabalho
+            </a>
+            <a href="../app/views/static/ia_chat.html?q=Quais%20sao%20meus%20direitos%20como%20consumidor%3F" class="ai-chip">
+                <i class="bi bi-receipt"></i> Consumidor
+            </a>
+            <a href="../app/views/static/ia_chat.html?q=Como%20funciona%20pensao%20alimenticia%3F" class="ai-chip">
+                <i class="bi bi-people"></i> Familia
+            </a>
+        </div>
 
-        <form action="../app/views/static/teste.html" method="GET">
-            <input type="text" placeholder="Ex: Posso faltar ao trabalho com atestado?" required>
-            <button type="submit">
-                <i class="bi bi-search"></i> Perguntar
-            </button>
-        </form>
+        <div class="ai-showcase-actions">
+            <a href="../app/views/static/ia_chat.html" class="btn primary">
+                <i class="bi bi-chat-dots-fill"></i> Abrir chat da IA
+            </a>
+        </div>
     </section>
 
     <!-- FUNCIONALIDADES -->
@@ -144,7 +183,9 @@ if ($url !== '/index.php') {
 </main>
 
 <script src="./JS/Storage.js"></script>
+<script src="./JS/themeMenu.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
+

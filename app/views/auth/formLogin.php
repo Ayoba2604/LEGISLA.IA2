@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -11,33 +11,10 @@
 <body>
 
 
-<header>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="../../../public/index.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="formLogin.php">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="formCadastro.php">Cadastro</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../static/teste.html">IA</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../static/sobrenos.php">Sobre Nós</a>
-        </li>
-
-    </ul>
-</header>
-
-<div class="theme-switch">
-            <label class="mudar tema">
-                <input type="checkbox" id="toggle-theme">
-                <span class="slider"></span>
-            </label>
-</div>
+<?php
+$currentView = 'login';
+require_once __DIR__ . '/../static/nav_view.php';
+?>
 
 </body>
 
@@ -47,13 +24,13 @@
         <h1>Login</h1>
         <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
             <div class="error-message" style="color: red; margin-bottom: 10px; text-align: center;">
-                Email ou senha inválidos
+                Email ou senha invÃ¡lidos
             </div>
         <?php endif; ?>
 
         <div class="input-box">
           <input type="hidden" name="route" value="consultas/login">
-          <input type="text" name="email" placeholder="Nome de usuário" required />
+          <input type="text" name="email" placeholder="Nome de usuÃ¡rio" required />
           <i class="bx bxs-user"></i>
         </div>
 
@@ -76,9 +53,11 @@
 
     <script src="../../../assets/css/style.css"></script>
     <script src="../../../public/JS/Storage.js"></script>
+    <script src="../../../public/JS/themeMenu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
 
   
+
 
 

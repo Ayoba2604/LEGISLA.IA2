@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 session_start();
 ?>
 <!DOCTYPE html>
@@ -13,61 +13,19 @@ session_start();
 </head>
 <body>
 
-<header>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="../../../public/index.php">Home</a>
-        </li>
+<?php
+$currentView = 'sobrenos';
+require_once __DIR__ . '/nav_view.php';
+?>
 
-        <?php if (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true): ?>
-            <!-- Botões visíveis só quando logado -->
-            <?php if (!empty($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
-                <!-- Usuário admin -->
-                <li class="nav-item">
-                    <a class="nav-link" href="../usuario/adminDashboard.php">Central de Controle</a>
-                </li>
-            <?php else: ?>
-                <!-- Usuário comum -->
-                <li class="nav-item">
-                    <a class="nav-link" href="../auth/perfil.php">Perfil</a>
-                </li>
-            <?php endif; ?>
-            <li class="nav-item">
-                <a class="nav-link" href="../../../public/index.php?route=consultas/logout">Sair</a>
-            </li>
-        <?php else: ?>
-            <!-- Botões para quem NÃO está logado -->
-            <li class="nav-item">
-                <a class="nav-link" href="../auth/formLogin.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../auth/formCadastro.php">Cadastro</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../static/teste.html">IA</a>
-            </li>
-        <?php endif; ?>
-
-        <li class="nav-item">
-            <a class="nav-link" href="sobrenos.php">Sobre Nós</a>
-        </li>
-    </ul>
-</header>
-
-    <div class="theme-switch">
-        <label class="mudar tema">
-            <input type="checkbox" id="toggle-theme">
-            <span class="slider"></span>
-        </label>
-    </div>
-</body>
+    </body>
 
 <section class="sobre-nos">
-        <h1 clas='nozes'>Conheça nossa equipe</h1>
+        <h1 clas='nozes'>ConheÃ§a nossa equipe</h1>
         <div class="colaboradores">
             <div class="colaborador">
                 <img src="../../../public/imagens/Joao.png" alt="Joao Miranda foto">
-                <p>João Miranda - Designer Gráfico</p>
+                <p>JoÃ£o Miranda - Designer GrÃ¡fico</p>
             </div>
             <div class="colaborador">
                 <img src="../../../public/imagens/alan.jpeg" alt="Alan Nunes">
@@ -85,5 +43,7 @@ session_start();
 </section>
 
     <script src="../../../public/JS/Storage.js"></script>
+    <script src="../../../public/JS/themeMenu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
+

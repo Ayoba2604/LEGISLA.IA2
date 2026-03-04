@@ -26,7 +26,7 @@ function handleRoute()
             {
                 echo 'cadastro deu ruim';
             }
-            
+            break;
 
         case 'consultas/login':
             if ($method === 'POST') 
@@ -43,7 +43,7 @@ function handleRoute()
                     exit();
                 }
             }
-            
+            break;
         case 'consultas/logout':
             if ($method === 'GET') 
             {
@@ -51,9 +51,9 @@ function handleRoute()
                 
                 $controller->logout();
             }
-        default:
+            default:
             return 0;
-            
+            break;
     }
 }
 

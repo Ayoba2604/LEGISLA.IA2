@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legisla.IA | Assistente Juridico</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../../assets/css/styleia.css">
+</head>
+<body>
+
+<button id="open-sidebar" class="floating-btn" aria-label="Abrir menu">
+    <i class="bi bi-layout-sidebar-inset"></i>
+</button>
+
+<aside id="sidebar" class="closed">
+    <div class="sidebar-top">
+        <h2><i class="bi bi-stars"></i> Legisla.IA</h2>
+        <p>Seu assistente juridico com linguagem simples.</p>
+    </div>
+
+    <div class="sidebar-actions">
+        <button id="new-chat-btn"><i class="bi bi-chat-square-text"></i> Nova conversa</button>
+        <button id="config-btn"><i class="bi bi-sliders2"></i> Configuracoes</button>
+        <div id="settings-popover" class="settings-popover" hidden>
+            <strong class="settings-title">Tema:</strong>
+            <button type="button" class="settings-theme-option" data-theme="light">
+                Claro <i class="bi bi-sun"></i>
+            </button>
+            <button type="button" class="settings-theme-option" data-theme="dark">
+                Escuro <i class="bi bi-moon-stars"></i>
+            </button>
+        </div>
+        <a href="../../../public/index.php"><i class="bi bi-arrow-left"></i> Voltar ao inicio</a>
+    </div>
+
+    <div class="sidebar-foot">
+        <small>Status da IA</small>
+        <strong><span class="status-dot"></span> Online</strong>
+    </div>
+
+    <button id="close-sidebar" class="close-btn" aria-label="Fechar menu">
+        <i class="bi bi-x-lg"></i>
+    </button>
+    <input type="checkbox" id="toggle-theme" hidden>
+</aside>
+
+<main id="chat-container">
+    <div class="chat-head">
+        <div>
+            <h1>Assistente IA Juridico</h1>
+            <p>Pergunte sobre trabalho, consumidor, familia e mais.</p>
+        </div>
+    </div>
+
+    <div class="prompt-list" id="prompt-list">
+        <button class="prompt-chip" data-prompt="Posso faltar ao trabalho com atestado?">Atestado no trabalho</button>
+        <button class="prompt-chip" data-prompt="Quais sao meus direitos em uma compra com defeito?">Compra com defeito</button>
+        <button class="prompt-chip" data-prompt="Como funciona pensao alimenticia no Brasil?">Pensao alimenticia</button>
+    </div>
+
+    <div id="messages"></div>
+
+    <div id="input-area">
+        <input id="input-text" type="text" placeholder="Digite sua pergunta juridica...">
+        <label for="pdf-input" class="icon-btn" title="Anexar PDF">
+            <i class="bi bi-paperclip"></i>
+        </label>
+        <input id="pdf-input" type="file" accept="application/pdf">
+        <button id="send-btn" title="Enviar"><i class="bi bi-send-fill"></i></button>
+    </div>
+</main>
+
+<script src="../../../public/JS/Storage.js"></script>
+<script src="../../../public/JS/script.js"></script>
+</body>
+</html>

@@ -1,46 +1,30 @@
-<?php
-require_once __DIR__ . '/../models/usuariosModel.php';
+﻿<?php
+require_once __DIR__ . '/_php/usuario_requests.php';
 
 class UsuarioController {
 
     protected $model;
 
     public function __construct() {
-        // Prefer environment variables for DB credentials; fallback to hardcoded defaults.
-        // You can set DB_DSN (full DSN) or DB_HOST/DB_NAME/DB_PORT and DB_USER/DB_PASS.
-        $env_dsn = getenv('DB_DSN') ?: null;
-        if (!$env_dsn && getenv('DB_HOST') && getenv('DB_NAME')) {
-            $port = getenv('DB_PORT') ?: '5432';
-            $env_dsn = sprintf('pgsql:host=%s;port=%s;dbname=%s;', getenv('DB_HOST'), $port, getenv('DB_NAME'));
-        }
-
-        $dsn = $env_dsn ?: "pgsql:host=localhost;port=5432;dbname=UsuariosLegislaIA;";
-        $username = getenv('DB_USER') ?: 'postgres';
-        $password = getenv('DB_PASS') ?: 'postgres';
-
-        $this->model = new UsuarioModel($dsn, $username, $password);
+        $this->model = legislaUsuarioModelFromEnv();
     }
 
-    // Cadastrar novo usuário
-    public function cadastrarConta($nome, $email, $senha) 
+    // Cadastrar novo usuario
+    public function cadastrarConta($nome, $email, $senha)
     {
-        // Validação básica
         if (empty($nome) || empty($email) || empty($senha)) {
-            return "Todos os campos são obrigatórios!";
+            return 'Todos os campos sao obrigatorios!';
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return "Por favor, insira um email válido!";
+            return 'Por favor, insira um email valido!';
         }
 
-        // Chama a model para criar usuário
         $sucesso = $this->model->criarUsuario($nome, $email, $senha);
 
         if ($sucesso) {
-            // Busca o usuário recém-criado para preencher a sessão
-            $usuario = $this->model->getUsuarioPorEmail($email); 
-            if ($usuario) 
-            {
+            $usuario = $this->model->getUsuarioPorEmail($email);
+            if ($usuario) {
                 $_SESSION['statusLogado'] = true;
                 $_SESSION['id'] = $usuario['id_usuario'];
                 $_SESSION['usuario'] = $usuario['nome'];
@@ -49,15 +33,14 @@ class UsuarioController {
             }
             return true;
         }
-        else {
-            return "Erro ao cadastrar usuário.";
-        }
+
+        return 'Erro ao cadastrar usuario.';
     }
 
     // Login
     public function loginConta($email, $senha) {
         if (empty($email) || empty($senha)) {
-            return false; // falha
+            return false;
         }
 
         if ($login = $this->model->login($email, $senha)) {
@@ -72,27 +55,26 @@ class UsuarioController {
         return false;
     }
 
-    // Editar usuário
+    // Editar usuario
     public function editarConta($id, $nome, $email, $senha) {
         if (empty($nome) || empty($email) || empty($senha)) {
-            return "Todos os campos são obrigatórios!";
+            return 'Todos os campos sao obrigatorios!';
         }
 
         return $this->model->atualizarUsuario($id, $nome, $email, $senha);
     }
 
-    // Excluir usuário
+    // Excluir usuario
     public function deletarConta($id) {
         return $this->model->deletarUsuario($id);
     }
 
     public function logout() {
         if (session_status() === PHP_SESSION_NONE) {
-            session_start(); // só inicia se ainda não tiver sessão
+            session_start();
         }
 
-        session_unset();    // limpa variáveis
-        session_destroy();  // destrói sessão
+        session_unset();
+        session_destroy();
     }
-
 }
