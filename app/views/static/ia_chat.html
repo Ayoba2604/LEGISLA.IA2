@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legisla.IA | Assistente Juridico</title>
+    <meta name="legisla-api-base-url" content="">
+    <meta name="legisla-session-token-url" content="../../../public/index.php?route=consultas/chat-token">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../../assets/css/styleia.css">
 </head>
@@ -49,7 +51,32 @@
     <div class="chat-head">
         <div>
             <h1>Assistente IA Juridico</h1>
-            <p>Pergunte sobre trabalho, consumidor, familia e mais.</p>
+            <p>Pergunte sobre trabalho, consumidor, familia e mais. Agora com resposta estruturada, limites e fontes.</p>
+        </div>
+    </div>
+
+    <div class="chat-controls">
+        <label class="control-group">
+            <span>Modo de resposta</span>
+            <select id="response-mode">
+                <option value="friendly">Explicar em linguagem simples</option>
+                <option value="technical">Mostrar fundamento tecnico</option>
+            </select>
+        </label>
+
+        <label class="control-group">
+            <span>Filtrar fontes</span>
+            <select id="source-filter">
+                <option value="">Todas</option>
+                <option value="legacy_seed">Base juridica carregada</option>
+                <option value="situation">Situacoes</option>
+                <option value="contract">Contratos</option>
+                <option value="user_document">Documento enviado</option>
+            </select>
+        </label>
+
+        <div class="attached-documents" id="attached-documents">
+            <span class="attached-label">Nenhum documento anexado</span>
         </div>
     </div>
 
@@ -63,10 +90,10 @@
 
     <div id="input-area">
         <input id="input-text" type="text" placeholder="Digite sua pergunta juridica...">
-        <label for="pdf-input" class="icon-btn" title="Anexar PDF">
+        <label for="pdf-input" class="icon-btn" title="Anexar documento">
             <i class="bi bi-paperclip"></i>
         </label>
-        <input id="pdf-input" type="file" accept="application/pdf">
+        <input id="pdf-input" type="file" accept=".pdf,.txt,.md,.json,.docx,application/pdf,text/plain,text/markdown,application/json,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
         <button id="send-btn" title="Enviar"><i class="bi bi-send-fill"></i></button>
     </div>
 </main>

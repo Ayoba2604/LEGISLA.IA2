@@ -1,25 +1,34 @@
-
 import pytest
+
+pytest.importorskip("fastapi.testclient")
+
 from fastapi.testclient import TestClient
-from main import app
+
+from backend.app.main import app
+
 
 client = TestClient(app)
 
-def test_read_main():
-    response = client.get("/")
-    assert response.status_code == 404 # Endpoint não existe, esperado 404
+
+def test_health():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"
+
 
 def test_consulta_artigo():
-    response = client.get("/consulta?artigo=1")
+    response = client.get("/consulta", params={"artigo": "1"})
     assert response.status_code == 200
+    assert "resposta" in response.json()
+
 
 def test_consulta_tema():
-    response = client.get("/consulta?tema=trabalho")
+    response = client.get("/consulta", params={"tema": "trabalho"})
     assert response.status_code == 200
+    assert "resposta" in response.json()
 
-def test_consulta_tipo_invalido():
-    response = client.get("/consulta?tipo=invalido")
+
+def test_perguntar():
+    response = client.post("/perguntar", json={"texto": "Quais sao meus direitos como consumidor?"})
     assert response.status_code == 200
-    assert response.json() == {"mensagem": "Tipo inválido. Use 'consulta', 'analise_situacao' ou 'analise_contrato'."}
-
-
+    assert "resposta" in response.json()

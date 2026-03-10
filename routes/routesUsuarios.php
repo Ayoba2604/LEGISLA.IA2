@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/controllers/usuariosController.php";
+require_once "../app/controllers/_php/backend_auth.php";
 
 function handleRoute() 
 {
@@ -51,6 +52,40 @@ function handleRoute()
                 
                 $controller->logout();
             }
+            break;
+        case 'consultas/chat-token':
+            if ($method === 'GET')
+            {
+                header('Content-Type: application/json; charset=utf-8');
+
+                if (empty($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || empty($_SESSION['id'])) {
+                    http_response_code(401);
+                    echo json_encode(['detail' => 'Sessao nao autenticada.'], JSON_UNESCAPED_UNICODE);
+                    exit();
+                }
+
+                try {
+                    $token = legislaGenerateBackendUserToken($_SESSION);
+                } catch (RuntimeException $exception) {
+                    http_response_code(503);
+                    echo json_encode(['detail' => $exception->getMessage()], JSON_UNESCAPED_UNICODE);
+                    exit();
+                }
+
+                echo json_encode(
+                    [
+                        'token' => $token,
+                        'user' => [
+                            'id' => $_SESSION['id'],
+                            'email' => $_SESSION['email'] ?? null,
+                            'admin' => !empty($_SESSION['admin']),
+                        ],
+                    ],
+                    JSON_UNESCAPED_UNICODE
+                );
+                exit();
+            }
+            break;
             default:
             return 0;
             break;

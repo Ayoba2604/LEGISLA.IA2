@@ -1,0 +1,1411 @@
+[
+  {
+    "title": "Constituicao da Republica Federativa do Brasil de 1988",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Constituicao Federal de 1988",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\constituicao-federal-de-1988.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "constituicao"
+    ],
+    "metadata": {
+      "numero_norma": "Constituicao Federal de 1988",
+      "ramo_direito": "constitucional",
+      "tema": "Direitos e garantias fundamentais",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/Constituicao/ConstituicaoCompilado.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "constituicao",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "Codigo de Defesa do Consumidor",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Lei 8.078/1990",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\lei-8-078-1990.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "consumidor"
+    ],
+    "metadata": {
+      "numero_norma": "Lei 8.078/1990",
+      "ramo_direito": "consumidor",
+      "tema": "Relacoes de consumo",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "lei",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "Codigo Civil",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Lei 10.406/2002",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\lei-10-406-2002.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "civil"
+    ],
+    "metadata": {
+      "numero_norma": "Lei 10.406/2002",
+      "ramo_direito": "civil",
+      "tema": "Obrigacoes e responsabilidade civil",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "lei",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "Consolidacao das Leis do Trabalho",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Decreto-Lei 5.452/1943",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\decreto-lei-5-452-1943.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "trabalho"
+    ],
+    "metadata": {
+      "numero_norma": "Decreto-Lei 5.452/1943",
+      "ramo_direito": "trabalhista",
+      "tema": "Relacoes de trabalho",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "decreto_lei",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "Codigo de Processo Civil",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Lei 13.105/2015",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\lei-13-105-2015.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "processo-civil"
+    ],
+    "metadata": {
+      "numero_norma": "Lei 13.105/2015",
+      "ramo_direito": "processual_civil",
+      "tema": "Processo civil",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "lei",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "Lei Geral de Protecao de Dados Pessoais",
+    "source_type": "legislation",
+    "authority": "primary",
+    "description": "Fonte primaria oficial coletada do Planalto: Lei 13.709/2018",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\planalto\\lei-13-709-2018.html",
+    "mime_type": "text/html",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "legislacao",
+      "federal",
+      "dados-pessoais"
+    ],
+    "metadata": {
+      "numero_norma": "Lei 13.709/2018",
+      "ramo_direito": "digital",
+      "tema": "Protecao de dados pessoais",
+      "url_origem": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "vigencia": "vigente",
+      "metadata_extra": {
+        "tipo_norma": "lei",
+        "collector": "planalto_legislation"
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt nos EDcl no AgInt no AREsp 202303670191",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\939774.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202303670191",
+      "relator": "MOURA RIBEIRO",
+      "data_publicacao": "2025-12-18",
+      "data_julgamento": "2025-11-05",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "939774",
+        "sigla_classe": "AgInt nos EDcl no AgInt no AREsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202404827070",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\938820.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202404827070",
+      "relator": "LUIS FELIPE SALOMÃO",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-11",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "938820",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt no RE no AgInt no REsp 202000032282",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\940807.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202000032282",
+      "relator": "LUIS FELIPE SALOMÃO",
+      "data_publicacao": "2025-11-28",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "940807",
+        "sigla_classe": "AgInt no RE no AgInt no REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt na SS 202404043830",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\940825.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202404043830",
+      "relator": "HERMAN BENJAMIN",
+      "data_publicacao": "2025-11-28",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "940825",
+        "sigla_classe": "AgInt na SS",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - PET na APn 201800823267",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\941489.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "201800823267",
+      "relator": "MARIA ISABEL GALLOTTI",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "941489",
+        "sigla_classe": "PET na APn",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgRg nos EDcl no Inq 202301312513",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\938381.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202301312513",
+      "relator": "RAUL ARAÚJO",
+      "data_publicacao": "2025-12-12",
+      "data_julgamento": "2025-12-03",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "938381",
+        "sigla_classe": "AgRg nos EDcl no Inq",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - EDcl na APn 200800845330",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\941492.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "200800845330",
+      "relator": "FRANCISCO FALCÃO",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "941492",
+        "sigla_classe": "EDcl na APn",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgRg no RE nos EDcl no AgRg no AREsp 202404368847",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\940816.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202404368847",
+      "relator": "LUIS FELIPE SALOMÃO",
+      "data_publicacao": "2025-11-14",
+      "data_julgamento": "2025-11-11",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "940816",
+        "sigla_classe": "AgRg no RE nos EDcl no AgRg no AREsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - EDcl nos EAREsp 202400876444",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\941580.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202400876444",
+      "relator": "JOÃO OTÁVIO DE NORONHA",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "941580",
+        "sigla_classe": "EDcl nos EAREsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - APn 201500556732",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\937177.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "201500556732",
+      "relator": "HUMBERTO MARTINS",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-19",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "937177",
+        "sigla_classe": "APn",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt no RE nos EDcl nos EDcl no REsp 201901714955",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\937178.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "201901714955",
+      "relator": "LUIS FELIPE SALOMÃO",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "937178",
+        "sigla_classe": "AgInt no RE nos EDcl nos EDcl no REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED CFB:****** ANO:1988\n*****  CF-1988    CONSTITUIÇÃO FEDERAL DE 1988\n        ART:00005 INC:00035 INC:00036 INC:00054"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - EDcl no REsp 202401990934",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Corte Especial",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-corte-especial\\937179.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-corte-especial"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "CORTE ESPECIAL",
+      "numero_processo": "202401990934",
+      "relator": "LUIS FELIPE SALOMÃO",
+      "data_publicacao": "2025-12-01",
+      "data_julgamento": "2025-11-25",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/5ebbfe8a-05f3-4106-a160-794d91b740b8/resource/7fea3777-7808-4c4e-89fa-1b56380ee308/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-corte-especial",
+        "stj_record_id": "937179",
+        "sigla_classe": "EDcl no REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AR 202103384906",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939775.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202103384906",
+      "relator": "GURGEL DE FARIA",
+      "data_publicacao": "2025-12-18",
+      "data_julgamento": "2025-10-02",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939775",
+        "sigla_classe": "AR",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt nos EREsp 202304406750",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\941006.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202304406750",
+      "relator": "TEODORO SILVA SANTOS",
+      "data_publicacao": "2025-11-18",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "941006",
+        "sigla_classe": "AgInt nos EREsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt na AR 201200717062",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\941019.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "201200717062",
+      "relator": "FRANCISCO FALCÃO",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "941019",
+        "sigla_classe": "AgInt na AR",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt no CC 202402833922",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\941013.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202402833922",
+      "relator": "MARCO AURÉLIO BELLIZZE",
+      "data_publicacao": "2025-11-25",
+      "data_julgamento": "2025-11-18",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "941013",
+        "sigla_classe": "AgInt no CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202501857524",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939541.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202501857524",
+      "relator": "MARIA THEREZA DE ASSIS MOURA",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939541",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036",
+          "LEG:FED LEI:010406 ANO:2002\n*****  CC-02    CÓDIGO CIVIL DE 2002\n        ART:00189 ART:00205"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202501858307",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939542.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202501858307",
+      "relator": "MARIA THEREZA DE ASSIS MOURA",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939542",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036",
+          "LEG:FED LEI:010406 ANO:2002\n*****  CC-02    CÓDIGO CIVIL DE 2002\n        ART:00189 ART:00205"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202400168741",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939543.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202400168741",
+      "relator": "TEODORO SILVA SANTOS",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939543",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:004502 ANO:1964\n*****  LIC    LEI DO IMPOSTO DE CONSUMO\n        ART:00014 INC:00002",
+          "LEG:FED LEI:005172 ANO:1966\n*****  CTN-66    CÓDIGO TRIBUTÁRIO NACIONAL\n        ART:00046 ART:00047 INC:00002 LET:A ART:00051",
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202400242428",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939544.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202400242428",
+      "relator": "TEODORO SILVA SANTOS",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939544",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:004502 ANO:1964\n*****  LIC    LEI DO IMPOSTO DE CONSUMO\n        ART:00014 INC:00002",
+          "LEG:FED LEI:005172 ANO:1966\n*****  CTN-66    CÓDIGO TRIBUTÁRIO NACIONAL\n        ART:00046 ART:00047 INC:00002 LET:A ART:00051",
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202400059734",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\939545.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202400059734",
+      "relator": "TEODORO SILVA SANTOS",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "939545",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:004502 ANO:1964\n*****  LIC    LEI DO IMPOSTO DE CONSUMO\n        ART:00014 INC:00002",
+          "LEG:FED LEI:005172 ANO:1966\n*****  CTN-66    CÓDIGO TRIBUTÁRIO NACIONAL\n        ART:00046 ART:00047 INC:00002 LET:A ART:00051",
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt no CC 202502521996",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\941240.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202502521996",
+      "relator": "FRANCISCO FALCÃO",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "941240",
+        "sigla_classe": "AgInt no CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt nos EREsp 202404864454",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\941256.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202404864454",
+      "relator": "FRANCISCO FALCÃO",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "941256",
+        "sigla_classe": "AgInt nos EREsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt na Rcl 202501538149",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Primeira Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-primeira-secao\\940996.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-primeira-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "PRIMEIRA SEÇÃO",
+      "numero_processo": "202501538149",
+      "relator": "MARIA THEREZA DE ASSIS MOURA",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/a96a175b-a54b-4bfd-82b8-fcd7cc0200bc/resource/3f342029-6a60-4443-8207-f5355b2cb207/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-primeira-secao",
+        "stj_record_id": "940996",
+        "sigla_classe": "AgInt na Rcl",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - EDcl no AgInt no CC 202500580358",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938330.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202500580358",
+      "relator": "JOÃO OTÁVIO DE NORONHA",
+      "data_publicacao": "2025-10-17",
+      "data_julgamento": "2025-10-14",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938330",
+        "sigla_classe": "EDcl no AgInt no CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202502692300",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\940217.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202502692300",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "940217",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - REsp 202400639787",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\939546.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202400639787",
+      "relator": "RICARDO VILLAS BÔAS CUEVA",
+      "data_publicacao": "2025-12-17",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "939546",
+        "sigla_classe": "REsp",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:013465 ANO:2017",
+          "LEG:FED LEI:009514 ANO:1997\n*****  LSFIAF    LEI DO SISTEMA DE FINANCIAMENTO IMOBILIÁRIO E\nALIENAÇÃO FIDUCIÁRIA\n        ART:00027 PAR:0002B ART:00039 INC:00002\n(COM A REDAÇÃO DADA PELA LEI 13.465/2017)",
+          "LEG:FED DEL:000070 ANO:1966\n        ART:00034",
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:01036",
+          "LEG:FED DEL:004657 ANO:1942\n*****  LINDB-42    LEI DE INTRODUÇÃO ÀS NORMAS DO DIREITO BRASILEIRO\n        ART:00006"
+        ]
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202503399430",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\940212.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202503399430",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "940212",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - Rcl 202402887654",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938856.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202402887654",
+      "relator": "MOURA RIBEIRO",
+      "data_publicacao": "2025-11-24",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938856",
+        "sigla_classe": "Rcl",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - AgInt nos EDcl na AR 202304123674",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\941204.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202304123674",
+      "relator": "JOÃO OTÁVIO DE NORONHA",
+      "data_publicacao": "2025-12-16",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "941204",
+        "sigla_classe": "AgInt nos EDcl na AR",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202503844786",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\940205.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202503844786",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-11-17",
+      "data_julgamento": "2025-11-12",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "940205",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202503887438",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938899.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202503887438",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938899",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - Rcl 202403218154",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938895.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202403218154",
+      "relator": "MOURA RIBEIRO",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938895",
+        "sigla_classe": "Rcl",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202504334417",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938905.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202504334417",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938905",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202504347569",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938906.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202504347569",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938906",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": []
+      }
+    }
+  },
+  {
+    "title": "STJ - CC 202504024054",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "description": "Jurisprudencia oficial STJ via dados abertos: Espelhos de acórdãos - Segunda Seção",
+    "path": "C:\\Users\\Ryan\\Downloads\\LEGISLA.IA2\\backend\\data\\corpus_snapshots\\official\\stj\\espelhos-de-acordaos-segunda-secao\\938901.txt",
+    "mime_type": "text/plain",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": [
+      "jurisprudencia",
+      "stj",
+      "espelhos-de-acordaos-segunda-secao"
+    ],
+    "metadata": {
+      "tribunal": "STJ",
+      "orgao_julgador": "SEGUNDA SEÇÃO",
+      "numero_processo": "202504024054",
+      "relator": "DANIELA TEIXEIRA",
+      "data_publicacao": "2025-12-15",
+      "data_julgamento": "2025-12-10",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "url_origem": "https://dadosabertos.web.stj.jus.br/dataset/7107650a-f26c-4900-bffd-4492af6361cf/resource/f328c602-093a-42b3-be3c-47e73cc1991e/download/20251231.json",
+      "metadata_extra": {
+        "collector": "stj_open_data",
+        "stj_dataset": "espelhos-de-acordaos-segunda-secao",
+        "stj_record_id": "938901",
+        "sigla_classe": "CC",
+        "tipo_decisao": "ACÓRDÃO",
+        "referencias_legislativas": [
+          "LEG:FED LEI:013105 ANO:2015\n*****  CPC-15    CÓDIGO DE PROCESSO CIVIL DE 2015\n        ART:00063 PAR:00005",
+          "LEG:FED SUM:****** ANO:****\n*****  SUM(STJ)    SÚMULA DO SUPERIOR TRIBUNAL DE JUSTIÇA\n        SUM:000033"
+        ]
+      }
+    }
+  }
+]

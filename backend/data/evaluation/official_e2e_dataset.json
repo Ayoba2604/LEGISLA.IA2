@@ -1,0 +1,45 @@
+[
+  {
+    "id": "cf88_art5_xxxii",
+    "question": "O que diz o art. 5º, XXXII, da Constituição Federal sobre a defesa do consumidor?",
+    "expected_title_contains": "Constituicao da Republica Federativa do Brasil de 1988",
+    "expected_article": "Art. 5",
+    "expected_source_type": "legislation"
+  },
+  {
+    "id": "cdc_art14",
+    "question": "Qual e a regra do art. 14 do Codigo de Defesa do Consumidor sobre responsabilidade do fornecedor?",
+    "expected_title_contains": "Codigo de Defesa do Consumidor",
+    "expected_article": "Art. 14",
+    "expected_source_type": "legislation"
+  },
+  {
+    "id": "cc_art186",
+    "question": "O art. 186 do Codigo Civil define ato ilicito?",
+    "expected_title_contains": "Codigo Civil",
+    "expected_article": "Art. 186",
+    "expected_source_type": "legislation"
+  },
+  {
+    "id": "clt_art129",
+    "question": "O que a CLT preve no art. 129 sobre ferias anuais?",
+    "expected_title_contains": "Consolidacao das Leis do Trabalho",
+    "expected_article": "Art. 129",
+    "expected_source_type": "legislation"
+  },
+  {
+    "id": "cpc_art5",
+    "question": "O Codigo de Processo Civil exige boa-fe de quem participa do processo no art. 5o?",
+    "expected_title_contains": "Codigo de Processo Civil",
+    "expected_article": "Art. 5",
+    "expected_source_type": "legislation"
+  },
+  {
+    "id": "lgpd_art7",
+    "question": "Quais bases legais de tratamento aparecem no art. 7 da LGPD?",
+    "expected_title_contains": "Lei Geral de Protecao de Dados Pessoais",
+    "expected_article": "Art. 7",
+    "expected_source_type": "legislation"
+  }
+]
+

@@ -7,7 +7,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $shouldHandleRoute =
     ($method === 'POST' && in_array($route, ['consultas/login', 'consultas/cadastrar'], true)) ||
-    ($method === 'GET' && $route === 'consultas/logout');
+    ($method === 'GET' && in_array($route, ['consultas/logout', 'consultas/chat-token'], true));
 
 if ($shouldHandleRoute) {
     handleRoute();

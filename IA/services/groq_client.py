@@ -1,75 +1,37 @@
+"""Legacy compatibility wrappers for the old Groq integration."""
+
+from __future__ import annotations
+
 import logging
-from groq import Groq
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from backend.app.services.llm_service import LegalLLMService
+
+logger = logging.getLogger(__name__)
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+_llm_service = LegalLLMService()
 
 
-GROQ_API_KEY = "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"
-
-client = Groq(api_key=GROQ_API_KEY)
-
-logging.basicConfig(level=logging.INFO)
-
-def gerar_resposta_groq(pergunta: str, base_dados: list = None) -> str:
-    """
-    Pergunta a IA jurídica. Se base_dados for fornecida, ela é incluída no prompt.
-    """
+def gerar_resposta_groq(pergunta: str, base_dados: list | None = None) -> str:
     contexto = ""
     if base_dados:
-        for item in base_dados:
-            if 'artigo' in item:
-                contexto += f"Artigo: {item['artigo']}\nTema: {item.get('tema','')}\nTexto: {item.get('texto','')}\nExplicação: {item.get('explicacao','')}\n\n"
-            elif 'descricao' in item:
-                contexto += f"Situação: {item['descricao']}\nAnálise: {item.get('analise','')}\n\n"
-            elif 'tipo' in item:
-                contexto += f"Contrato: {item['tipo']}\nAnálise: {item.get('analise','')}\n\n"
-
-    prompt = f"""
-Você é uma assistente jurídica virtual. Use o contexto abaixo para responder à pergunta.
-Contexto:
-{contexto}
-
-Pergunta do usuário: {pergunta}
-Responda de forma clara, objetiva e educada.
-"""
-    try:
-        response = client.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            model="llama-3.1-8b-instant"
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        return f":(  Erro ao gerar resposta: {e}"
+        contexto = "\n".join(str(item) for item in base_dados)
+    merged = f"{pergunta}\n\nContexto:\n{contexto}".strip()
+    return _llm_service.summarize_text(merged, mode="resposta jurídica")
 
 
 def gerar_resumo_groq(texto: str, tipo: str = "resumo") -> str:
-    """
-    Gera um resumo ou resposta de forma estruturada usando LLaMA-3.1-8b-instant.
-    - texto: conteúdo a ser resumido ou interpretado
-    - tipo: tipo de resumo, por exemplo 'resumo de documento jurídico'
-    """
-    prompt = f"""
-Você é uma IA jurídica experiente. Sua tarefa é analisar o seguinte conteúdo
-e produzir um resumo ou resposta clara e estruturada em português, de acordo
-com o tipo solicitado: {tipo.upper()}.
+    if not GROQ_API_KEY:
+        logger.warning("GROQ_API_KEY não configurada; usando fallback local.")
+    return _llm_service.summarize_text(texto, mode=tipo)
 
-Conteúdo:
-{texto}
-"""
-
-    try:
-        response = client.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            model="openai/gpt-oss-120b",
-            temperature=0.2, 
-        )
-        
-        msg = getattr(response.choices[0].message, "content", "")
-        return msg.strip() if msg else "⚠️ Não foi possível gerar a resposta."
-    except Exception as e:
-        logging.error(f"Erro no Groq: {e}", exc_info=True)
-        return f"⚠️ Erro ao gerar resposta com Groq: {e}"
 
 def gerar_resposta_generica_groq(texto: str) -> str:
-    """
-    Função genérica para pedir à IA que se apresente ou responda perguntas jurídicas.
-    """
     return gerar_resumo_groq(texto, tipo="resposta teste")

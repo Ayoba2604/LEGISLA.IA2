@@ -1,0 +1,21 @@
+[
+  {
+    "id": "q1",
+    "question": "Posso faltar ao trabalho com atestado?",
+    "expected_source_type": "legacy_seed",
+    "expected_keyword": "trabalh"
+  },
+  {
+    "id": "q2",
+    "question": "Quais documentos preciso em um divorcio consensual sem filhos?",
+    "expected_source_type": "situation",
+    "expected_keyword": "divorcio"
+  },
+  {
+    "id": "q3",
+    "question": "O que devo observar em um contrato de locacao?",
+    "expected_source_type": "contract",
+    "expected_keyword": "locacao"
+  }
+]
+

@@ -277,6 +277,58 @@ body.sidebar-open #chat-container {
   color: var(--ink-2);
 }
 
+.chat-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg-soft) 88%, transparent);
+}
+
+.control-group {
+  display: grid;
+  gap: 6px;
+  min-width: 220px;
+  color: var(--ink-1);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.control-group span {
+  color: var(--ink-2);
+}
+
+.control-group select {
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+  color: var(--ink-0);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.attached-documents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.attached-label,
+.attached-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+  color: var(--ink-1);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .prompt-list {
   display: flex;
   gap: 10px;
@@ -335,6 +387,154 @@ body.sidebar-open #chat-container {
   background: var(--bg-1);
   color: var(--ink-1);
   border-bottom-left-radius: 5px;
+}
+
+.system-message {
+  align-self: center;
+  max-width: 100%;
+  border: 1px dashed var(--line);
+  background: color-mix(in srgb, var(--bg-soft) 80%, transparent);
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.assistant-card {
+  width: min(100%, 860px);
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.assistant-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.answer-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  color: var(--chip-ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--bg-soft);
+  color: var(--ink-1);
+  border: 1px solid var(--line);
+}
+
+.confidence-badge.high {
+  background: color-mix(in srgb, var(--ok) 18%, var(--bg-1));
+  color: var(--ok);
+}
+
+.confidence-badge.medium {
+  background: color-mix(in srgb, #f59e0b 18%, var(--bg-1));
+  color: #b45309;
+}
+
+.confidence-badge.low {
+  background: color-mix(in srgb, var(--danger) 18%, var(--bg-1));
+  color: var(--danger);
+}
+
+.assistant-section {
+  display: grid;
+  gap: 8px;
+}
+
+.assistant-section h3 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.assistant-section p,
+.assistant-list,
+.source-list {
+  margin: 0;
+}
+
+.assistant-list,
+.source-list {
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.assistant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.assistant-section.warning {
+  border: 1px solid color-mix(in srgb, var(--danger) 28%, var(--line));
+  border-radius: 14px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--danger) 7%, var(--bg-1));
+}
+
+.source-item {
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--bg-soft);
+}
+
+.source-title {
+  font-weight: 800;
+  color: var(--ink-0);
+}
+
+.source-meta {
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+.source-item blockquote {
+  margin: 10px 0 0;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent);
+  color: var(--ink-1);
+}
+
+.debug-panel {
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+
+.debug-panel summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.debug-panel pre {
+  margin: 10px 0 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg-soft);
+  overflow: auto;
+  font-size: 12px;
 }
 
 #input-area {
@@ -454,6 +654,10 @@ input[type="file"] {
     gap: 8px;
   }
 
+  .chat-controls {
+    padding: 10px 12px;
+  }
+
   .prompt-chip {
     width: 100%;
     text-align: left;
@@ -465,6 +669,14 @@ input[type="file"] {
 
   .message {
     max-width: 92%;
+  }
+
+  .assistant-card {
+    width: 100%;
+  }
+
+  .assistant-grid {
+    grid-template-columns: 1fr;
   }
 
   #input-area {

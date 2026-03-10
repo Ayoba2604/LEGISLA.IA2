@@ -1,2 +1,18 @@
-# Ambiente virtual Python
+# Python
 .venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.coverage
+backend/data/corpus_snapshots/
+
+# Environment
+.env
+.env.local
+
+# Frontend/OS
+node_modules/
+.DS_Store
+Thumbs.db

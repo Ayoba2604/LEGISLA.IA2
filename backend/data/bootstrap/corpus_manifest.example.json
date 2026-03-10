@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Constituicao Federal de 1988",
+    "source_type": "legislation",
+    "authority": "primary",
+    "url": "https://exemplo.gov.br/legislacao/constituicao.html",
+    "mime_type": "text/html",
+    "description": "Exemplo de fonte primaria oficial.",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": ["federal", "constituicao"],
+    "metadata": {
+      "tema": "Direito constitucional",
+      "url_origem": "https://exemplo.gov.br/legislacao/constituicao.html",
+      "versao": "2026-03-10",
+      "vigencia": "vigente"
+    }
+  },
+  {
+    "title": "Acordao Exemplo STJ",
+    "source_type": "jurisprudence",
+    "authority": "primary",
+    "path": "docs/fontes/oficiais/stj_acordao_exemplo.pdf",
+    "description": "Exemplo de jurisprudencia oficial importada por arquivo local.",
+    "is_official": true,
+    "is_primary": true,
+    "hierarchy": ["jurisprudencia", "stj"],
+    "metadata": {
+      "tribunal": "STJ",
+      "tema": "Responsabilidade civil",
+      "numero_processo": "0000000-00.0000.0.00.0000",
+      "relator": "Ministro Exemplo",
+      "vigencia": "historico"
+    }
+  },
+  {
+    "title": "Doutrina Licenciada Exemplo",
+    "source_type": "licensed_doctrine",
+    "authority": "secondary",
+    "path": "docs/fontes/licenciadas/doutrina_exemplo.md",
+    "description": "Exemplo de material licenciado ou em dominio publico.",
+    "is_official": false,
+    "is_primary": false,
+    "hierarchy": ["doutrina", "licenciada"],
+    "metadata": {
+      "tema": "Direito do consumidor",
+      "versao": "1.0"
+    }
+  }
+]

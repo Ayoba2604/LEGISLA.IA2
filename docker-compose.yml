@@ -1,0 +1,53 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: legislaia-postgres
+    environment:
+      POSTGRES_DB: legislaia
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: legislaia-backend
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/legislaia
+      LEGISLA_INTERNAL_SECRET: ${LEGISLA_INTERNAL_SECRET:-change-me-internal}
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+
+  php-web:
+    build:
+      context: .
+      dockerfile: docker/php-apache.Dockerfile
+    container_name: legislaia-php
+    environment:
+      DB_DRIVER: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: legislaia
+      DB_USER: postgres
+      DB_PASS: postgres
+      LEGISLA_INTERNAL_SECRET: ${LEGISLA_INTERNAL_SECRET:-change-me-internal}
+    depends_on:
+      - postgres
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+
+volumes:
+  pgdata:

@@ -1,0 +1,103 @@
+{
+  "snapshot_root": "backend/data/corpus_snapshots/official",
+  "manifest_output_path": "backend/data/bootstrap/corpus_manifest.official.json",
+  "planalto_legislation": [
+    {
+      "title": "Constituicao da Republica Federativa do Brasil de 1988",
+      "url": "https://www.planalto.gov.br/ccivil_03/Constituicao/ConstituicaoCompilado.htm",
+      "numero_norma": "Constituicao Federal de 1988",
+      "tipo_norma": "constituicao",
+      "ramo_direito": "constitucional",
+      "tema": "Direitos e garantias fundamentais",
+      "hierarchy": ["federal", "constituicao"]
+    },
+    {
+      "title": "Codigo de Defesa do Consumidor",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "numero_norma": "Lei 8.078/1990",
+      "tipo_norma": "lei",
+      "ramo_direito": "consumidor",
+      "tema": "Relacoes de consumo",
+      "hierarchy": ["federal", "consumidor"]
+    },
+    {
+      "title": "Codigo Civil",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+      "numero_norma": "Lei 10.406/2002",
+      "tipo_norma": "lei",
+      "ramo_direito": "civil",
+      "tema": "Obrigacoes e responsabilidade civil",
+      "hierarchy": ["federal", "civil"]
+    },
+    {
+      "title": "Consolidacao das Leis do Trabalho",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm",
+      "numero_norma": "Decreto-Lei 5.452/1943",
+      "tipo_norma": "decreto_lei",
+      "ramo_direito": "trabalhista",
+      "tema": "Relacoes de trabalho",
+      "hierarchy": ["federal", "trabalho"]
+    },
+    {
+      "title": "Codigo de Processo Civil",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+      "numero_norma": "Lei 13.105/2015",
+      "tipo_norma": "lei",
+      "ramo_direito": "processual_civil",
+      "tema": "Processo civil",
+      "hierarchy": ["federal", "processo-civil"]
+    },
+    {
+      "title": "Lei Geral de Protecao de Dados Pessoais",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "numero_norma": "Lei 13.709/2018",
+      "tipo_norma": "lei",
+      "ramo_direito": "digital",
+      "tema": "Protecao de dados pessoais",
+      "hierarchy": ["federal", "dados-pessoais"]
+    }
+  ],
+  "stj_open_data": [
+    {
+      "package_name": "espelhos-de-acordaos-corte-especial",
+      "title": "Espelhos de acordaos - Corte Especial",
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Jurisprudencia STJ - Corte Especial",
+      "max_records": 12
+    },
+    {
+      "package_name": "espelhos-de-acordaos-primeira-secao",
+      "title": "Espelhos de acordaos - Primeira Secao",
+      "ramo_direito": "direito_publico",
+      "tema": "Jurisprudencia STJ - Primeira Secao",
+      "max_records": 12
+    },
+    {
+      "package_name": "espelhos-de-acordaos-segunda-secao",
+      "title": "Espelhos de acordaos - Segunda Secao",
+      "ramo_direito": "direito_privado",
+      "tema": "Jurisprudencia STJ - Segunda Secao",
+      "max_records": 12
+    }
+  ],
+  "datajud_queries": [
+    {
+      "enabled": false,
+      "name": "datajud-processos-consumidor-tjrj",
+      "endpoint": "https://api-publica.datajud.cnj.jus.br/api_publica_tjrj/_search",
+      "tribunal": "TJRJ",
+      "ramo_direito": "consumidor",
+      "tema": "Metadados processuais publicos - consumidor",
+      "max_records": 20,
+      "payload": {
+        "size": 20,
+        "query": {
+          "match": {
+            "classe.nome": "consumidor"
+          }
+        }
+      }
+    }
+  ]
+}
+
