@@ -7,6 +7,11 @@ const configBtn = document.getElementById('config-btn');
 const settingsPopover = document.getElementById('settings-popover');
 const settingsThemeOptions = document.querySelectorAll('.settings-theme-option');
 const themeToggle = document.getElementById('toggle-theme');
+const iaStatusDot = document.getElementById('ia-status-dot');
+const iaStatusText = document.getElementById('ia-status-text');
+
+const API_BASE_URL = 'http://192.168.1.63:8000';
+const IA_STATUS_INTERVAL_MS = 30000;
 
 const messagesDiv = document.getElementById('messages');
 const inputText = document.getElementById('input-text');
@@ -64,6 +69,31 @@ function syncThemeOptions() {
     });
 }
 
+function setIaStatus(isOnline, label) {
+    if (!iaStatusDot || !iaStatusText) return;
+
+    iaStatusDot.classList.toggle('offline', !isOnline);
+    iaStatusText.textContent = label || (isOnline ? 'Online' : 'Offline');
+}
+
+async function checkIaStatus() {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/docs`, {
+            method: 'GET',
+            signal: controller.signal
+        });
+
+        setIaStatus(res.ok || res.status > 0, 'Online');
+    } catch (err) {
+        setIaStatus(false, 'Offline');
+    } finally {
+        clearTimeout(timeoutId);
+    }
+}
+
 settingsThemeOptions.forEach((opt) => {
     opt.addEventListener('click', () => {
         if (!themeToggle) return;
@@ -86,17 +116,19 @@ async function enviarPergunta() {
     const typingMsg = showTyping();
 
     try {
-        const res = await fetch('http://127.0.0.1:8000/perguntar', {
+        const res = await fetch(`${API_BASE_URL}/perguntar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ texto })
         });
 
+        setIaStatus(true, 'Online');
         const data = await res.json();
         typingMsg.remove();
 
         addMessage(data.resposta || 'Sem resposta no momento.', false);
     } catch (err) {
+        setIaStatus(false, 'Offline');
         typingMsg.remove();
         addMessage('Erro: ' + err.message, false);
     }
@@ -134,6 +166,8 @@ window.addEventListener('DOMContentLoaded', () => {
     setSidebarState(window.innerWidth > 1024);
     if (settingsPopover) settingsPopover.hidden = true;
     syncThemeOptions();
+    checkIaStatus();
+    setInterval(checkIaStatus, IA_STATUS_INTERVAL_MS);
 
     const params = new URLSearchParams(window.location.search);
     const question = params.get('q');

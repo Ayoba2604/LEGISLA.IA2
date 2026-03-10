@@ -19,6 +19,11 @@
   --accent-2: #0b5cbc;
   --accent-soft: #e7f2ff;
   --ok: #159f62;
+  --danger: #e34b4b;
+  --chip-bg: #e7f2ff;
+  --chip-bg-hover: #dcedff;
+  --chip-border: #c7d8eb;
+  --chip-ink: #114170;
   --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
 }
 
@@ -37,6 +42,11 @@
   --accent-2: #2f7ddd;
   --accent-soft: #142744;
   --ok: #32c47a;
+  --danger: #ff6b6b;
+  --chip-bg: #1b2b46;
+  --chip-bg-hover: #243a5f;
+  --chip-border: #385076;
+  --chip-ink: #d7e7ff;
   --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
@@ -192,6 +202,10 @@ body.sidebar-open #sidebar {
   background: var(--ok);
 }
 
+.status-dot.offline {
+  background: var(--danger);
+}
+
 .close-btn {
   border: 1px solid var(--line);
   background: var(--bg-1);
@@ -232,6 +246,8 @@ body.sidebar-open #sidebar {
   flex: 1;
   margin: 28px;
   margin-left: 28px;
+  height: calc(100vh - 56px);
+  min-height: 0;
   background: color-mix(in srgb, var(--bg-1) 92%, transparent);
   border: 1px solid var(--line);
   border-radius: 22px;
@@ -271,9 +287,9 @@ body.sidebar-open #chat-container {
 }
 
 .prompt-chip {
-  border: 1px solid #c7d8eb;
-  background: var(--accent-soft);
-  color: #114170;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--chip-ink);
   border-radius: 999px;
   padding: 8px 14px;
   font-size: 13px;
@@ -282,11 +298,12 @@ body.sidebar-open #chat-container {
 }
 
 .prompt-chip:hover {
-  background: #dcedff;
+  background: var(--chip-bg-hover);
 }
 
 #messages {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 20px 22px;
   display: flex;
@@ -321,6 +338,9 @@ body.sidebar-open #chat-container {
 }
 
 #input-area {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
   border-top: 1px solid var(--line);
   padding: 14px 16px;
   display: flex;
@@ -394,6 +414,7 @@ input[type="file"] {
   #chat-container {
     margin: 14px;
     margin-left: 14px;
+    height: calc(100vh - 28px);
     border-radius: 16px;
   }
 
@@ -418,7 +439,8 @@ input[type="file"] {
 
   #chat-container {
     margin: 0;
-    min-height: 100vh;
+    min-height: 100dvh;
+    height: 100dvh;
     border-radius: 0;
     border: none;
   }

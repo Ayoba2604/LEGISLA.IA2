@@ -27,8 +27,7 @@ class UsuarioModel extends Database {
     }
 
     //metodo de usuarios
-    public function login($email, $senha) {
-       
+    public function login($email, $senha) {      
         $sql = "SELECT * FROM usuarios WHERE email = :email LIMIT 1";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);

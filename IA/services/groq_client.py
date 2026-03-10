@@ -2,7 +2,7 @@ import logging
 from groq import Groq
 
 
-GROQ_API_KEY = "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"
+GROQ_API_KEY = "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"
 
 client = Groq(api_key=GROQ_API_KEY)
 
