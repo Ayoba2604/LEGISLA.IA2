@@ -4,7 +4,14 @@ from backend.app.config.settings import settings
 from backend.app.core.enums import IntentType
 from backend.app.models.domain import AgentResult, AnswerSections, DebugTrace, RetrievedChunk, ToolCallTrace
 from backend.app.observability.tracing import trace_step
-from backend.app.security.guardrails import assess_support_strength, requires_human_escalation
+from backend.app.security.guardrails import (
+    apply_verification_penalty,
+    assess_support_strength,
+    has_divergent_jurisprudence,
+    has_revoked_norm,
+    mixes_private_and_official_sources,
+    requires_human_escalation,
+)
 from backend.app.services.llm_service import LegalLLMService
 from backend.app.tools.legal_tools import LegalTools
 
@@ -41,15 +48,34 @@ class LegalAssistantAgent:
             limitations.append("Ha citacoes sem suporte robusto e elas nao devem ser tratadas como conclusivas.")
         if confidence_level.value == "low":
             limitations.append("Nivel de confianca baixo: a pergunta pede complementacao documental ou revisao humana.")
+        if has_divergent_jurisprudence(retrieved):
+            limitations.append("Ha divergencia jurisprudencial relevante na base recuperada e a orientacao nao deve ser tratada como uniforme.")
+        if has_revoked_norm(retrieved):
+            limitations.append("Ha norma com indicio de revogacao na base recuperada; confirme a vigencia da disciplina aplicavel.")
+        if mixes_private_and_official_sources(retrieved):
+            limitations.append("Documento do usuario e fonte privada e deve ser confrontado com a legislacao e a jurisprudencia oficial aplicavel.")
 
         with trace_step("agent.generate_answer"):
-            objective, foundation, final_limitations, next_steps = self.llm_service.generate_answer(
+            generated = self.llm_service.generate_answer(
                 question=question,
                 mode=mode,
                 retrieved=retrieved[:top_k],
                 citations=citations,
                 limitations=limitations,
             )
+        tool_traces.append(
+            ToolCallTrace(
+                tool_name="verificar_resposta_final",
+                input_payload={
+                    "executed": generated.verification.executed,
+                    "verified": generated.verification.verified,
+                    "issues": generated.verification.issues,
+                },
+                summary=generated.verification.summary(),
+            )
+        )
+        if generated.verification.executed and not generated.verification.verified:
+            support_score, confidence_level = apply_verification_penalty(support_score, confidence_level)
 
         debug_trace = None
         if include_debug and settings.expose_debug_trace:
@@ -85,17 +111,22 @@ class LegalAssistantAgent:
                     }
                     for item in retrieved[:top_k]
                 ],
-                response_preview=objective,
+                response_preview=generated.objective,
                 confidence_score=support_score,
             )
 
         answer = AnswerSections(
-            resposta_objetiva=objective,
-            fundamentacao_juridica=foundation,
+            resposta_objetiva=generated.objective,
+            fundamentacao_juridica=generated.foundation,
             fontes_consultadas=citations,
             citacoes=[citation.reference_label for citation in citations],
-            limites=final_limitations,
-            proximos_passos=next_steps,
+            limites=generated.limitations,
+            proximos_passos=generated.next_steps,
+        )
+        sufficient_support = bool(retrieved) and (
+            confidence_level.value != "low" or any(item.chunk.is_official for item in retrieved[:3])
+        ) and (
+            not generated.verification.executed or generated.verification.verified
         )
         return AgentResult(
             answer=answer,
@@ -103,8 +134,12 @@ class LegalAssistantAgent:
             confidence_level=confidence_level,
             intent=intent,
             mode=mode,
-            sufficient_support=bool(retrieved) and confidence_level.value != "low",
-            requires_human_escalation=escalation or requires_human_escalation(intent, confidence_level, question),
+            sufficient_support=sufficient_support,
+            requires_human_escalation=(
+                escalation
+                or requires_human_escalation(intent, confidence_level, question)
+                or (generated.verification.executed and not generated.verification.verified)
+            ),
             debug=debug_trace,
             retrieved_chunks=retrieved,
             tool_traces=tool_traces,
@@ -118,9 +153,10 @@ class LegalAssistantAgent:
             return retrieved, traces
 
         if intent == IntentType.JURISPRUDENCE_SUMMARY:
-            retrieved, trace = self.tools.buscar_jurisprudencia(question)
-            traces.append(trace)
-            return retrieved, traces
+            jurisprudence, jurisprudence_trace = self.tools.buscar_jurisprudencia(question)
+            sumulas, sumulas_trace = self.tools.buscar_sumulas(question)
+            traces.extend([jurisprudence_trace, sumulas_trace])
+            return self._merge_results(jurisprudence, sumulas), traces
 
         if intent == IntentType.CONTRACT_ANALYSIS:
             contracts, contract_trace = self.tools.buscar_contratos(question)

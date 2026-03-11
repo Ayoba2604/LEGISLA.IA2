@@ -7,7 +7,11 @@ from typing import Any
 from backend.app.config.settings import settings
 from backend.app.models.domain import AgentResult, AnswerSections, DebugTrace, ToolCallTrace
 from backend.app.prompts.system import MAIN_AGENT_SYSTEM_PROMPT
-from backend.app.security.guardrails import assess_support_strength, requires_human_escalation
+from backend.app.security.guardrails import (
+    apply_verification_penalty,
+    assess_support_strength,
+    requires_human_escalation,
+)
 from backend.app.services.llm_service import LegalLLMService
 from backend.app.services.model_runtime import ChatModelFactory
 from backend.app.tools.legal_tools import LegalTools, build_citations_from_results
@@ -158,20 +162,48 @@ class LangChainAgentRunner:
         if confidence_level.value == "low":
             limitations.append("A resposta precisa de complementacao documental ou revisao humana.")
 
+        verification = None
         if not raw_answer:
-            raw_answer, foundation, limitations, next_steps = self.llm_service.generate_answer(
+            generated = self.llm_service.generate_answer(
                 question=question,
                 mode=mode,
                 retrieved=recovered_results[:top_k],
                 citations=citations,
                 limitations=limitations,
             )
+            raw_answer = generated.objective
+            foundation = generated.foundation
+            limitations = generated.limitations
+            next_steps = generated.next_steps
+            verification = generated.verification
         else:
             foundation = self._build_foundation(tool_payloads)
             next_steps = [
                 "Valide os identificadores e a versao vigente da norma antes de usar a resposta.",
                 "Se houver impacto relevante no caso concreto, escale para revisao humana.",
             ]
+            verification = self.llm_service.verify_answer(
+                question=question,
+                objective=raw_answer,
+                foundation=foundation,
+                retrieved=recovered_results[:top_k],
+                citations=citations,
+            )
+            limitations = self.llm_service._merge_unique(limitations, verification.issues)
+
+        traces.append(
+            ToolCallTrace(
+                tool_name="verificar_resposta_final",
+                input_payload={
+                    "executed": verification.executed,
+                    "verified": verification.verified,
+                    "issues": verification.issues,
+                },
+                summary=verification.summary(),
+            )
+        )
+        if verification.executed and not verification.verified:
+            support_score, confidence_level = apply_verification_penalty(support_score, confidence_level)
 
         debug_trace = None
         if include_debug and settings.expose_debug_trace:
@@ -212,14 +244,23 @@ class LangChainAgentRunner:
             limites=limitations,
             proximos_passos=next_steps,
         )
+        sufficient_support = bool(citations) and (
+            confidence_level.value != "low"
+            or any(citation.source_type.value in {"legislation", "jurisprudence", "sumula", "process_metadata"} for citation in citations)
+        ) and (
+            not verification.executed or verification.verified
+        )
         return AgentResult(
             answer=answer,
             confidence_score=support_score,
             confidence_level=confidence_level,
             intent=intent,
             mode=mode,
-            sufficient_support=bool(citations) and confidence_level.value != "low",
-            requires_human_escalation=requires_human_escalation(intent, confidence_level, question),
+            sufficient_support=sufficient_support,
+            requires_human_escalation=(
+                requires_human_escalation(intent, confidence_level, question)
+                or (verification.executed and not verification.verified)
+            ),
             debug=debug_trace,
             retrieved_chunks=recovered_results,
             tool_traces=traces,

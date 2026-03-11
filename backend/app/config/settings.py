@@ -68,6 +68,7 @@ class Settings(BaseModel):
     reranker_candidate_limit: int = Field(default_factory=lambda: int(os.getenv("RERANKER_CANDIDATE_LIMIT", "12")))
     openai_api_key: str | None = Field(default_factory=lambda: os.getenv("OPENAI_API_KEY"))
     groq_api_key: str | None = Field(default_factory=lambda: os.getenv("GROQ_API_KEY"))
+    google_api_key: str | None = Field(default_factory=lambda: os.getenv("GOOGLE_API_KEY"))
     database_url: str | None = Field(default_factory=lambda: os.getenv("DATABASE_URL"))
     database_auto_create: bool = Field(default_factory=lambda: _env_bool("DATABASE_AUTO_CREATE", True))
     database_echo: bool = Field(default_factory=lambda: _env_bool("DATABASE_ECHO", False))
@@ -127,6 +128,22 @@ class Settings(BaseModel):
     maintenance_cleanup_batch_size: int = Field(
         default_factory=lambda: int(os.getenv("MAINTENANCE_CLEANUP_BATCH_SIZE", "200"))
     )
+    alert_failed_sync_sources_threshold: int = Field(
+        default_factory=lambda: int(os.getenv("ALERT_FAILED_SYNC_SOURCES_THRESHOLD", "1"))
+    )
+    alert_responses_without_citation_threshold: int = Field(
+        default_factory=lambda: int(os.getenv("ALERT_RESPONSES_WITHOUT_CITATION_THRESHOLD", "1"))
+    )
+    alert_stale_ingestion_job_minutes: int = Field(
+        default_factory=lambda: int(os.getenv("ALERT_STALE_INGESTION_JOB_MINUTES", "60"))
+    )
+    backup_output_dir: Path = Field(
+        default_factory=lambda: Path(
+            os.getenv("BACKUP_OUTPUT_DIR", str(Path(__file__).resolve().parents[3] / "backups"))
+        )
+    )
+    pg_dump_binary: str = Field(default_factory=lambda: os.getenv("PG_DUMP_BINARY", "pg_dump"))
+    docker_smoke_base_url: str = Field(default_factory=lambda: os.getenv("DOCKER_SMOKE_BASE_URL", "http://127.0.0.1:8000"))
     langsmith_tracing: bool = Field(default_factory=lambda: _env_bool("LANGSMITH_TRACING", False))
     langsmith_api_key: str | None = Field(default_factory=lambda: os.getenv("LANGSMITH_API_KEY"))
     langsmith_project: str | None = Field(default_factory=lambda: os.getenv("LANGSMITH_PROJECT"))
@@ -180,7 +197,14 @@ class Settings(BaseModel):
 
     def dict_for_debug(self) -> dict[str, Any]:
         data = self.model_dump()
-        for secret_name in ("admin_token", "internal_service_secret", "openai_api_key", "groq_api_key", "database_url"):
+        for secret_name in (
+            "admin_token",
+            "internal_service_secret",
+            "openai_api_key",
+            "groq_api_key",
+            "google_api_key",
+            "database_url",
+        ):
             if data.get(secret_name):
                 data[secret_name] = "***"
         return data

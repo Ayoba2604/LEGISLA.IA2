@@ -41,7 +41,16 @@ class RetrievalService:
             if self._database_only():
                 return []
         candidates = self._filtered_candidates(filters)
-        ranked = [self.retriever.score_chunk(query, chunk) for chunk in candidates]
+        query_embedding = self.embedding_service.embed_query(query)
+        ranked = [
+            self.retriever.score_chunk(
+                query,
+                chunk,
+                query_embedding=query_embedding,
+                chunk_embedding=self._chunk_embedding(chunk, query_embedding),
+            )
+            for chunk in candidates
+        ]
         ranked.sort(key=lambda item: item.final_score, reverse=True)
         reranked = self.reranker_service.rerank(query, ranked[: self.reranker_service.candidate_limit])
         return self.retriever.select_diverse(query, reranked[: settings.retrieval_candidate_limit], top_k)
@@ -66,6 +75,18 @@ class RetrievalService:
             ]
         if filters.tribunal:
             chunks = [chunk for chunk in chunks if chunk.metadata.tribunal == filters.tribunal]
+        if filters.orgao_julgador:
+            chunks = [chunk for chunk in chunks if chunk.metadata.orgao_julgador == filters.orgao_julgador]
+        if filters.relator:
+            chunks = [chunk for chunk in chunks if chunk.metadata.relator == filters.relator]
+        if filters.numero_processo:
+            chunks = [chunk for chunk in chunks if chunk.metadata.numero_processo == filters.numero_processo]
+        if filters.numero_norma:
+            chunks = [chunk for chunk in chunks if chunk.metadata.numero_norma == filters.numero_norma]
+        if filters.artigo:
+            chunks = [chunk for chunk in chunks if chunk.metadata.artigo == filters.artigo]
+        if filters.tema:
+            chunks = [chunk for chunk in chunks if chunk.metadata.tema == filters.tema]
         if filters.uf:
             chunks = [chunk for chunk in chunks if chunk.metadata.uf == filters.uf]
         if filters.ramo_direito:
@@ -82,3 +103,15 @@ class RetrievalService:
         from backend.app.config.settings import settings
 
         return bool(self.persistence and self.persistence.enabled and settings.retrieval_backend in {"auto", "db"})
+
+    def _chunk_embedding(self, chunk, query_embedding: list[float]) -> list[float]:
+        if chunk.embedding and len(chunk.embedding) == len(query_embedding):
+            return chunk.embedding
+
+        embedded = self.embedding_service.embed_query(chunk.search_text)
+        if len(embedded) == len(query_embedding):
+            return embedded
+
+        if chunk.embedding:
+            return chunk.embedding
+        return [0.0] * len(query_embedding)

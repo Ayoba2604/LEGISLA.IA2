@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(php|py\\)$\")",
+      "Bash(xargs head:*)",
+      "Bash(xxd \"c:/Users/Ryan/Downloads/LEGISLA.IA2/public/index.php\")",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(xxd \"$f\")",
+      "Bash(done)",
+      "Bash(do sed:*)",
+      "Bash(echo \"Cleaned: $f\")",
+      "Bash(wc -l \"c:/Users/Ryan/Downloads/LEGISLA.IA2/IA/data\"/*.json)",
+      "Bash(python3:*)",
+      "Bash(find c:UsersRyanDownloadsLEGISLA.IA2backendappservices -name *.py -type f)"
+    ]
+  }
+}

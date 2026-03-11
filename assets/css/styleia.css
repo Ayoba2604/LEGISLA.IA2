@@ -429,8 +429,8 @@ body.sidebar-open #chat-container {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 12px;
+  padding: 10px 14px;
+  font-size: 16px;
   font-weight: 800;
   background: var(--bg-soft);
   color: var(--ink-1);
@@ -455,6 +455,33 @@ body.sidebar-open #chat-container {
 .assistant-section {
   display: grid;
   gap: 8px;
+}
+
+.assistant-alert {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.assistant-alert strong {
+  font-size: 15px;
+}
+
+.assistant-alert.human-review {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
+  background: color-mix(in srgb, var(--danger) 14%, var(--bg-1));
+  color: color-mix(in srgb, var(--danger) 82%, black);
+}
+
+.assistant-alert.support-gap,
+.assistant-alert.low-confidence {
+  border-color: color-mix(in srgb, #f59e0b 48%, var(--line));
+  background: color-mix(in srgb, #f59e0b 12%, var(--bg-1));
+  color: color-mix(in srgb, #b45309 78%, black);
 }
 
 .assistant-section h3 {

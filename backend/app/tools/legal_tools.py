@@ -4,11 +4,26 @@ from dataclasses import dataclass
 from typing import Any
 
 from backend.app.core.enums import IntentType
-from backend.app.core.text import extract_article_reference
+from backend.app.core.text import contains_article_reference, extract_article_number, extract_article_reference, fold_text, normalize_text
 from backend.app.models.domain import Citation, ToolCallTrace
 from backend.app.schemas.retrieval import RetrievalFilters
 from backend.app.services.retrieval_service import RetrievalService
 from backend.app.services.source_catalog import SourceCatalog
+
+ARTICLE_CITATION_SOURCE_TYPES = {"legislation", "legacy_seed"}
+
+
+def _normalize_article_reference(value: str | None) -> str | None:
+    folded = fold_text(value or "").strip()
+    return folded or None
+
+
+def _quote_supported_by_chunk(quote: str, content: str) -> bool:
+    normalized_quote = normalize_text(quote)
+    normalized_content = normalize_text(content)
+    if not normalized_quote:
+        return False
+    return normalized_quote in normalized_content
 
 
 def build_citations_from_results(results) -> list[Citation]:
@@ -31,7 +46,12 @@ def build_citations_from_results(results) -> list[Citation]:
                 url=chunk.metadata.url_origem,
                 metadata={
                     "tribunal": chunk.metadata.tribunal,
+                    "orgao_julgador": chunk.metadata.orgao_julgador,
                     "numero_processo": chunk.metadata.numero_processo,
+                    "numero_norma": chunk.metadata.numero_norma,
+                    "artigo": chunk.metadata.artigo,
+                    "sumula_numero": chunk.metadata.sumula_numero,
+                    "relator": chunk.metadata.relator,
                     "tema": chunk.metadata.tema,
                 },
             )
@@ -70,10 +90,10 @@ class LegalTools:
                 "source_type": item.chunk.source_type.value,
                 "authority": item.chunk.authority.value,
                 "is_official": item.chunk.is_official,
+                "final_score": item.final_score,
                 "vector_score": item.vector_score,
                 "lexical_score": item.lexical_score,
                 "rerank_score": item.rerank_score,
-                "final_score": item.final_score,
                 "reason": item.reason,
                 "metadata": item.chunk.metadata.model_dump(mode="json"),
             }
@@ -136,6 +156,15 @@ class LegalTools:
         query = f"{lei} artigo {artigo}"
         filters = self._merged_filters(["legislation", "legacy_seed"])
         results = self.retrieval_service.search(query, top_k=3, filters=filters)
+        requested_article = extract_article_number(artigo) or extract_article_number(query)
+        if requested_article:
+            results = [
+                item
+                for item in results
+                if _normalize_article_reference(item.chunk.metadata.artigo) == requested_article
+                or contains_article_reference(item.chunk.search_text, requested_article)
+                or contains_article_reference(item.chunk.content, requested_article)
+            ]
         trace = ToolCallTrace(tool_name="buscar_artigo_por_numero", input_payload={"lei": lei, "artigo": artigo}, summary=f"{len(results)} chunks")
         return results, trace
 
@@ -194,12 +223,50 @@ class LegalTools:
         timeline = [{"titulo": item.chunk.title, "data": str(item.chunk.metadata.data_publicacao) if item.chunk.metadata.data_publicacao else None} for item in results]
         return timeline, ToolCallTrace(tool_name="cronologia_normativa", input_payload={"tema": tema}, summary=f"{len(timeline)} eventos")
 
-    def validar_citacoes(self, results):
-        citations = build_citations_from_results(results)
-        return {"validas": len(citations), "invalidas": 0}, ToolCallTrace(tool_name="validar_citacoes", summary=f"{len(citations)} citacoes verificadas")
+    def validar_citacoes(self, results, citations: list[Citation] | None = None):
+        citations = citations or build_citations_from_results(results)
+        chunks_by_id = {item.chunk.chunk_id: item.chunk for item in results}
+        valid_count = 0
+        invalid_count = 0
+        issues: list[str] = []
+
+        for citation in citations:
+            chunk = chunks_by_id.get(citation.chunk_id)
+            if chunk is None:
+                invalid_count += 1
+                issues.append(f"Citacao '{citation.reference_label}' aponta para chunk inexistente no contexto recuperado.")
+                continue
+
+            citation_issues: list[str] = []
+            cited_article = _normalize_article_reference(extract_article_reference(citation.reference_label))
+            chunk_article = _normalize_article_reference(chunk.metadata.artigo)
+
+            if cited_article != chunk_article:
+                citation_issues.append(
+                    f"artigo em referencia divergente: esperado '{chunk.metadata.artigo or 'sem artigo'}', obtido '{cited_article or 'sem artigo'}'"
+                )
+            if not _quote_supported_by_chunk(citation.quote, chunk.content):
+                citation_issues.append("quote nao localizada no conteudo do chunk")
+            if citation.source_type != chunk.source_type:
+                citation_issues.append("source_type divergente do chunk recuperado")
+            if cited_article and citation.source_type.value not in ARTICLE_CITATION_SOURCE_TYPES:
+                citation_issues.append("referencia por artigo em fonte cujo tipo nao sustenta citacao normativa")
+
+            if citation_issues:
+                invalid_count += 1
+                issues.append(f"Citacao '{citation.reference_label}' invalida: {', '.join(citation_issues)}.")
+            else:
+                valid_count += 1
+
+        summary = f"{len(citations)} citacoes verificadas, {invalid_count} invalidas"
+        return {
+            "validas": valid_count,
+            "invalidas": invalid_count,
+            "issues": issues,
+        }, ToolCallTrace(tool_name="validar_citacoes", summary=summary)
 
     def classificar_tipo_pergunta(self, pergunta: str):
-        lowered = pergunta.lower()
+        lowered = fold_text(pergunta)
         article_ref = extract_article_reference(lowered)
         if article_ref:
             intent = IntentType.ARTICLE_LOOKUP
@@ -222,6 +289,6 @@ class LegalTools:
         return intent, ToolCallTrace(tool_name="classificar_tipo_pergunta", input_payload={"pergunta": pergunta}, summary=intent.value)
 
     def detectar_necessidade_de_escalonamento_humano(self, pergunta: str):
-        lowered = pergunta.lower()
+        lowered = fold_text(pergunta)
         needs_escalation = any(marker in lowered for marker in ("urgente", "prazo", "risco criminal", "audiencia"))
         return needs_escalation, ToolCallTrace(tool_name="detectar_necessidade_de_escalonamento_humano", input_payload={"pergunta": pergunta}, summary=str(needs_escalation))

@@ -81,6 +81,13 @@ class UploadSummary(BaseModel):
     created_at: datetime | None = None
 
 
+class OperationalAlert(BaseModel):
+    code: str
+    severity: str
+    message: str
+    context: dict[str, Any] = Field(default_factory=dict)
+
+
 class AdminOverview(BaseModel):
     app: str
     version: str
@@ -93,4 +100,4 @@ class AdminOverview(BaseModel):
     manifest_present: bool
     database: DatabaseStatus
     metrics: dict[str, Any] = Field(default_factory=dict)
-
+    alerts: list[OperationalAlert] = Field(default_factory=list)

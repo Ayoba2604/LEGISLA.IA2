@@ -112,6 +112,30 @@ function renderAssistantResponse(payload) {
     msgDiv.classList.add('message', 'bot-message', 'assistant-card');
 
     const confidenceClass = (payload.confidence_level || 'low').toLowerCase();
+    const alerts = [];
+    if (payload.requires_human_escalation === true) {
+        alerts.push(`
+            <section class="assistant-alert human-review">
+                <strong>ATENCAO: Esta consulta exige revisao por advogado qualificado antes de qualquer acao.</strong>
+                <span>Ha risco juridico relevante, urgencia processual ou suporte insuficiente para uso autonomo da resposta.</span>
+            </section>
+        `);
+    }
+    if (payload.sufficient_support === false) {
+        alerts.push(`
+            <section class="assistant-alert support-gap">
+                <strong>A IA nao encontrou fontes suficientes para sustentar esta resposta com seguranca.</strong>
+                <span>Use a resposta apenas como triagem inicial e confirme a base normativa antes de agir.</span>
+            </section>
+        `);
+    } else if (confidenceClass === 'low') {
+        alerts.push(`
+            <section class="assistant-alert low-confidence">
+                <strong>Confianca baixa.</strong>
+                <span>Os sinais de recuperacao e verificacao sugerem necessidade de revisao humana ou complemento documental.</span>
+            </section>
+        `);
+    }
     const sourcesHtml = (payload.fontes_consultadas || [])
         .map((source) => {
             const meta = [];
@@ -146,6 +170,7 @@ function renderAssistantResponse(payload) {
                 Confianca ${Math.round((payload.confidence_score || 0) * 100)}%
             </span>
         </div>
+        ${alerts.join('')}
         <section class="assistant-section">
             <h3>Resposta objetiva</h3>
             <p>${escapeHtml(payload.resposta_objetiva || payload.resposta || 'Sem resposta no momento.')}</p>

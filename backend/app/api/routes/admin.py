@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi import APIRouter, Depends, Query, Request
 
 from backend.app.config.settings import settings
+from backend.app.observability.alerts import collect_operational_alerts
 from backend.app.observability.metrics import metrics
 from backend.app.schemas.admin import (
     AdminOverview,
@@ -12,6 +13,7 @@ from backend.app.schemas.admin import (
     CleanupExpiredUploadsRequest,
     DatabaseStatus,
     IngestionJobSummary,
+    OperationalAlert,
     RetrievalLogSummary,
     SyncStateSummary,
     UploadSummary,
@@ -33,6 +35,7 @@ def admin_overview(request: Request):
     database = DatabaseStatus.model_validate(
         persistence.database_status() if persistence else {"enabled": False, "connected": False, "pgvector_ready": False}
     )
+    active_alerts = collect_operational_alerts(persistence=persistence, metrics_snapshot=metrics.snapshot())
     return AdminOverview(
         app=settings.app_name,
         version=settings.app_version,
@@ -49,12 +52,22 @@ def admin_overview(request: Request):
         manifest_present=settings.bootstrap_manifest_path.exists(),
         database=database,
         metrics=metrics.snapshot(),
+        alerts=[OperationalAlert.model_validate(item) for item in active_alerts],
     )
 
 
 @router.get("/metrics")
 def admin_metrics():
     return metrics.snapshot()
+
+
+@router.get("/alerts", response_model=list[OperationalAlert])
+def admin_alerts(request: Request):
+    persistence = getattr(request.app.state, "persistence", None)
+    return [
+        OperationalAlert.model_validate(item)
+        for item in collect_operational_alerts(persistence=persistence, metrics_snapshot=metrics.snapshot())
+    ]
 
 
 @router.get("/retrieval-logs", response_model=list[RetrievalLogSummary])
@@ -120,4 +133,3 @@ def sync_manifest(
         persist=payload.persist,
         source_types=payload.source_types,
     )
-

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/_php/usuario_requests.php';
 
 class AdminController {

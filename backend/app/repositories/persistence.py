@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Iterable
 
 from backend.app.config.settings import settings
-from backend.app.core.text import stable_id
+from backend.app.core.text import extract_article_number, stable_id
 from backend.app.db.base import Base
 from backend.app.db.sqlalchemy_models import (
     ChunkORM,
@@ -166,11 +166,12 @@ class PersistenceService:
             return []
 
         try:
-            from sqlalchemy import Float, desc, func, literal_column, select
+            from sqlalchemy import Float, case, desc, func, literal, literal_column, select
         except Exception:  # pragma: no cover
             return []
 
         query_embedding = self.embedding_service.embed_query(query)
+        article_number = extract_article_number(query)
 
         with self.session_scope() as session:
             if session is None:
@@ -182,16 +183,34 @@ class PersistenceService:
                     func.to_tsvector(regconfig, ChunkORM.search_vector_text),
                     func.plainto_tsquery(regconfig, query),
                 )
+                article_match = literal(0.0)
+                if article_number:
+                    article_regex = rf"(^|[^0-9A-Za-z])art(igo)?\.?[[:space:]]*{article_number}([^0-9]|$)"
+                    article_match = case(
+                        (ChunkORM.search_vector_text.op("~*")(article_regex), 1.0),
+                        else_=0.0,
+                    )
+                    lexical_rank = lexical_rank + article_match
                 vector_score = (1 - EmbeddingORM.embedding.cosine_distance(query_embedding)).cast(Float)
                 stmt = (
-                    select(ChunkORM, SourceORM, vector_score.label("vector_score"), lexical_rank.label("lexical_score"))
+                    select(
+                        ChunkORM,
+                        SourceORM,
+                        vector_score.label("vector_score"),
+                        lexical_rank.label("lexical_score"),
+                        article_match.label("article_match"),
+                    )
                     .join(SourceORM, SourceORM.id == ChunkORM.source_id)
                     .join(EmbeddingORM, EmbeddingORM.chunk_id == ChunkORM.id)
                 )
                 stmt = self._apply_filters(stmt, filters)
                 stmt = stmt.where(EmbeddingORM.model_name == self.embedding_service.model_name)
                 stmt = stmt.where(EmbeddingORM.version_label == "current")
-                stmt = stmt.order_by(desc("vector_score"), desc("lexical_score")).limit(settings.retrieval_candidate_limit)
+                if article_number and (not filters.source_types or "legislation" in filters.source_types):
+                    stmt = stmt.order_by(desc("article_match"), desc("lexical_score"), desc("vector_score"))
+                else:
+                    stmt = stmt.order_by(desc("vector_score"), desc("lexical_score"))
+                stmt = stmt.limit(max(settings.retrieval_candidate_limit, top_k * 8))
                 rows = session.execute(stmt).all()
             except Exception as exc:  # pragma: no cover
                 logger.warning(
@@ -202,7 +221,7 @@ class PersistenceService:
 
         ranked = []
         for row in rows:
-            chunk_row, source_row, vector_value, lexical_value = row
+            chunk_row, source_row, vector_value, lexical_value, _article_match = row
             metadata = SourceMetadata.model_validate(chunk_row.metadata_json or {})
             if filters.owner_user_id and metadata.metadata_extra.get("owner_user_id") != filters.owner_user_id:
                 continue
@@ -300,7 +319,7 @@ class PersistenceService:
             for citation in result.answer.fontes_consultadas:
                 session.merge(
                     CitationORM(
-                        id=citation.citation_id,
+                        id=stable_id(assistant_message_id, citation.chunk_id, citation.reference_label),
                         conversation_id=conversation_id,
                         message_id=assistant_message_id,
                         chunk_id=citation.chunk_id,
@@ -680,6 +699,18 @@ class PersistenceService:
             stmt = stmt.where(SourceORM.source_type == "user_document")
         if filters.tribunal:
             stmt = stmt.where(ChunkORM.metadata_json["tribunal"].astext == filters.tribunal)
+        if filters.orgao_julgador:
+            stmt = stmt.where(ChunkORM.metadata_json["orgao_julgador"].astext == filters.orgao_julgador)
+        if filters.relator:
+            stmt = stmt.where(ChunkORM.metadata_json["relator"].astext == filters.relator)
+        if filters.numero_processo:
+            stmt = stmt.where(ChunkORM.metadata_json["numero_processo"].astext == filters.numero_processo)
+        if filters.numero_norma:
+            stmt = stmt.where(ChunkORM.metadata_json["numero_norma"].astext == filters.numero_norma)
+        if filters.artigo:
+            stmt = stmt.where(ChunkORM.metadata_json["artigo"].astext == filters.artigo)
+        if filters.tema:
+            stmt = stmt.where(ChunkORM.metadata_json["tema"].astext == filters.tema)
         if filters.uf:
             stmt = stmt.where(ChunkORM.metadata_json["uf"].astext == filters.uf)
         if filters.ramo_direito:

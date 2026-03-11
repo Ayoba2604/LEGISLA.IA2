@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import math
 import os
 from typing import Any
 
@@ -8,6 +9,29 @@ from backend.app.config.settings import settings
 from backend.app.core.text import hashed_embedding
 
 logger = logging.getLogger(__name__)
+DEFAULT_EMBEDDING_DIMENSIONS = 256
+
+
+def _normalize_embedding(vector: list[float]) -> list[float]:
+    if not vector:
+        return []
+    normalized = [float(item) for item in vector]
+    norm = math.sqrt(sum(item * item for item in normalized)) or 1.0
+    return [item / norm for item in normalized]
+
+
+class _GoogleEmbeddingsAdapter:
+    def __init__(self, *, model_name: str, google_api_key: str, dimensions: int = DEFAULT_EMBEDDING_DIMENSIONS) -> None:
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+        self.dimensions = dimensions
+        self._client = GoogleGenerativeAIEmbeddings(model=model_name, google_api_key=google_api_key)
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return self._client.embed_documents(texts, output_dimensionality=self.dimensions)
+
+    def embed_query(self, text: str) -> list[float]:
+        return self._client.embed_query(text, output_dimensionality=self.dimensions)
 
 
 class EmbeddingService:
@@ -24,23 +48,39 @@ class EmbeddingService:
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         if self._client:
-            return self._client.embed_documents(texts)
-        return [hashed_embedding(text) for text in texts]
+            return [_normalize_embedding(vector) for vector in self._client.embed_documents(texts)]
+        return [hashed_embedding(text, dimensions=DEFAULT_EMBEDDING_DIMENSIONS) for text in texts]
 
     def embed_query(self, text: str) -> list[float]:
         if self._client:
-            return self._client.embed_query(text)
-        return hashed_embedding(text)
+            return _normalize_embedding(self._client.embed_query(text))
+        return hashed_embedding(text, dimensions=DEFAULT_EMBEDDING_DIMENSIONS)
 
     def _build_client(self):
         if self.provider == "openai" and settings.openai_api_key:
             try:
                 from langchain_openai import OpenAIEmbeddings
 
-                return OpenAIEmbeddings(model=self.model_name, api_key=settings.openai_api_key)
+                return OpenAIEmbeddings(
+                    model=self.model_name,
+                    api_key=settings.openai_api_key,
+                    dimensions=DEFAULT_EMBEDDING_DIMENSIONS,
+                )
             except Exception as exc:  # pragma: no cover
                 logger.warning(
                     "Failed to initialize OpenAI embeddings, falling back to hash.",
+                    extra={"extra_payload": {"error": str(exc)}},
+                )
+        if self.provider in {"google", "gemini"} and settings.google_api_key:
+            try:
+                return _GoogleEmbeddingsAdapter(
+                    model_name=self.model_name,
+                    google_api_key=settings.google_api_key,
+                    dimensions=DEFAULT_EMBEDDING_DIMENSIONS,
+                )
+            except Exception as exc:  # pragma: no cover
+                logger.warning(
+                    "Failed to initialize Google/Gemini embeddings, falling back to hash.",
                     extra={"extra_payload": {"error": str(exc)}},
                 )
         return None
@@ -73,6 +113,22 @@ class ChatModelFactory:
             except Exception as exc:  # pragma: no cover
                 logger.warning(
                     "Failed to initialize ChatGroq.",
+                    extra={"extra_payload": {"error": str(exc)}},
+                )
+                return None
+
+        if self.provider in {"google", "gemini"} and settings.google_api_key:
+            try:
+                from langchain_google_genai import ChatGoogleGenerativeAI
+
+                return ChatGoogleGenerativeAI(
+                    model=self.model_name,
+                    temperature=0.1,
+                    google_api_key=settings.google_api_key,
+                )
+            except Exception as exc:  # pragma: no cover
+                logger.warning(
+                    "Failed to initialize ChatGoogleGenerativeAI.",
                     extra={"extra_payload": {"error": str(exc)}},
                 )
                 return None

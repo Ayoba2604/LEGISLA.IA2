@@ -68,6 +68,12 @@ def main() -> None:
                 "has_citations": bool(response.fontes_consultadas),
                 "intent": response.intent,
                 "source_type": response.fontes_consultadas[0].source_type.value if response.fontes_consultadas else None,
+                "confidence_level": response.confidence_level,
+                "requires_human_escalation": response.requires_human_escalation,
+                "limites_texto": " ".join(response.limites).lower(),
+                "resposta_texto": response.resposta_objetiva.lower(),
+                "fontes_titulos": [citation.title.lower() for citation in response.fontes_consultadas],
+                "fontes_tipos": [citation.source_type.value for citation in response.fontes_consultadas],
             }
         else:
             _, _, _, injection_detected = pipeline.ingest_upload(
@@ -80,8 +86,8 @@ def main() -> None:
         checks = item["checks"]
         result = {"id": item["id"], "observation": observation, "checks": {}}
         for key, expected in checks.items():
-            matched = observation.get(key) == expected
-            result["checks"][key] = {"expected": expected, "observed": observation.get(key), "matched": matched}
+            matched, observed = evaluate_check(key, expected, observation)
+            result["checks"][key] = {"expected": expected, "observed": observed, "matched": matched}
             total_checks += 1
             matched_checks += int(matched)
         rows.append(result)
@@ -118,7 +124,11 @@ def build_default_catalog() -> SourceCatalog:
         authority=SourceAuthority.PRIMARY,
         is_official=True,
         is_primary=True,
-        text="Lei Municipal 123/1990. Art. 1. Norma historica. Vigencia: revogada pela Lei Municipal 456/2005.",
+        text=(
+            "Lei Municipal 123/1990.\n"
+            "Art. 1. Norma historica sobre ocupacao urbana municipal.\n"
+            "Vigencia: revogada pela Lei Municipal 456/2005."
+        ),
         metadata=SourceMetadata(numero_norma="Lei Municipal 123/1990", vigencia="revogada", tema="Vigencia normativa"),
     )
     add_text_source(
@@ -155,6 +165,22 @@ def build_default_catalog() -> SourceCatalog:
             numero_processo="Apelacao 2222222",
             relator="Desembargador Exemplo B",
             tema="Transporte aereo",
+        ),
+    )
+    add_text_source(
+        catalog,
+        title="Sumula 297 do STJ",
+        source_type=SourceType.SUMULA,
+        authority=SourceAuthority.PRIMARY,
+        is_official=True,
+        is_primary=True,
+        text="Sumula 297 do STJ. O Codigo de Defesa do Consumidor e aplicavel as instituicoes financeiras.",
+        metadata=SourceMetadata(
+            tribunal="STJ",
+            sumula_numero="297",
+            numero_norma="Sumula 297",
+            enunciado="O Codigo de Defesa do Consumidor e aplicavel as instituicoes financeiras.",
+            tema="Instituicoes financeiras e CDC",
         ),
     )
     add_text_source(
@@ -222,6 +248,28 @@ def add_text_source(
         metadata=metadata,
     )
     catalog.add_source(source, chunk_source(source), persist=False)
+
+
+def evaluate_check(key: str, expected, observation: dict) -> tuple[bool, object]:
+    observed = observation.get(key)
+    if key.endswith("_contains"):
+        haystack = str(observation.get(key.removesuffix("_contains"), ""))
+        return str(expected).lower() in haystack.lower(), haystack
+    if key.endswith("_contains_any"):
+        haystack = str(observation.get(key.removesuffix("_contains_any"), ""))
+        expected_values = [str(item).lower() for item in expected]
+        return any(item in haystack.lower() for item in expected_values), haystack
+    if key.endswith("_includes"):
+        values = observation.get(key.removesuffix("_includes"), []) or []
+        expected_value = str(expected).lower()
+        normalized = [str(item).lower() for item in values]
+        return any(expected_value in item for item in normalized), normalized
+    if key.endswith("_includes_any"):
+        values = observation.get(key.removesuffix("_includes_any"), []) or []
+        normalized = [str(item).lower() for item in values]
+        expected_values = [str(item).lower() for item in expected]
+        return any(any(expected_value in item for item in normalized) for expected_value in expected_values), normalized
+    return observed == expected, observed
 
 
 if __name__ == "__main__":

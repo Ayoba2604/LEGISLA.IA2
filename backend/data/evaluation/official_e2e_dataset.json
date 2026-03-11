@@ -1,7 +1,7 @@
 [
   {
     "id": "cf88_art5_xxxii",
-    "question": "O que diz o art. 5º, XXXII, da Constituição Federal sobre a defesa do consumidor?",
+    "question": "O que diz o art. 5, XXXII, da Constituicao Federal sobre a defesa do consumidor?",
     "expected_title_contains": "Constituicao da Republica Federativa do Brasil de 1988",
     "expected_article": "Art. 5",
     "expected_source_type": "legislation"
@@ -42,4 +42,3 @@
     "expected_source_type": "legislation"
   }
 ]
-

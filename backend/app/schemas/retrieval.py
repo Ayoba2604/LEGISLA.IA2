@@ -7,6 +7,12 @@ class RetrievalFilters(BaseModel):
     source_types: list[str] = Field(default_factory=list)
     source_ids: list[str] = Field(default_factory=list)
     tribunal: str | None = None
+    orgao_julgador: str | None = None
+    relator: str | None = None
+    numero_processo: str | None = None
+    numero_norma: str | None = None
+    artigo: str | None = None
+    tema: str | None = None
     uf: str | None = None
     ramo_direito: str | None = None
     owner_user_id: str | None = None

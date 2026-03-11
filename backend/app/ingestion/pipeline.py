@@ -8,6 +8,7 @@ from backend.app.core.enums import SourceAuthority, SourceType
 from backend.app.core.text import stable_id
 from backend.app.ingestion.chunkers import chunk_source
 from backend.app.ingestion.fetchers import fetch_remote_payload, load_local_payload
+from backend.app.ingestion.legal_metadata import enrich_source_metadata
 from backend.app.ingestion.loaders import load_bytes_as_text
 from backend.app.ingestion.normalizers import compute_document_hash
 from backend.app.models.domain import ChunkRecord, SourceMetadata, SourceRecord
@@ -194,6 +195,12 @@ class IngestionPipeline:
                     "mime_type": mime_type,
                 },
             }
+        )
+        metadata = enrich_source_metadata(
+            source_type=source_type,
+            title=title,
+            text=text,
+            metadata=metadata,
         )
         source_id = stable_id(title, metadata.url_origem or filename, doc_hash)
         record = SourceRecord(

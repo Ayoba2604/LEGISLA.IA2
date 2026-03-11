@@ -3,15 +3,44 @@ from __future__ import annotations
 import json
 import logging
 import re
+from dataclasses import dataclass, field
 from typing import Any
 
 from backend.app.config.settings import settings
 from backend.app.core.enums import ResponseMode
 from backend.app.models.domain import Citation, RetrievedChunk
-from backend.app.prompts.system import FINAL_RESPONSE_PROMPT, MAIN_AGENT_SYSTEM_PROMPT
+from backend.app.prompts.system import (
+    CITATION_VERIFIER_PROMPT,
+    FINAL_RESPONSE_PROMPT,
+    MAIN_AGENT_SYSTEM_PROMPT,
+)
 from backend.app.services.model_runtime import ChatModelFactory
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class AnswerVerification:
+    executed: bool = False
+    verified: bool = True
+    issues: list[str] = field(default_factory=list)
+    raw_payload: dict[str, Any] = field(default_factory=dict)
+
+    def summary(self) -> str:
+        if not self.executed:
+            return "verificacao pos-geracao nao executada"
+        if self.verified:
+            return "resposta verificada sem inconsistencias"
+        return f"resposta com {len(self.issues)} problema(s) de suporte"
+
+
+@dataclass
+class GeneratedAnswer:
+    objective: str
+    foundation: str
+    limitations: list[str]
+    next_steps: list[str]
+    verification: AnswerVerification = field(default_factory=AnswerVerification)
 
 
 class LegalLLMService:
@@ -33,7 +62,7 @@ class LegalLLMService:
         retrieved: list[RetrievedChunk],
         citations: list[Citation],
         limitations: list[str],
-    ) -> tuple[str, str, list[str], list[str]]:
+    ) -> GeneratedAnswer:
         if self.provider == "mock" or not retrieved or self.chat_model is None:
             return self._build_deterministic_answer(question, mode, retrieved, citations, limitations)
 
@@ -45,6 +74,70 @@ class LegalLLMService:
                 extra={"extra_payload": {"error": str(exc)}},
             )
             return self._build_deterministic_answer(question, mode, retrieved, citations, limitations)
+
+    def verify_answer(
+        self,
+        *,
+        question: str,
+        objective: str,
+        foundation: str,
+        retrieved: list[RetrievedChunk],
+        citations: list[Citation],
+    ) -> AnswerVerification:
+        if self.provider == "mock" or self.chat_model is None or not retrieved:
+            return AnswerVerification()
+
+        prompt = (
+            f"{MAIN_AGENT_SYSTEM_PROMPT.strip()}\n\n"
+            f"{CITATION_VERIFIER_PROMPT.strip()}\n\n"
+            "Retorne apenas JSON valido com as chaves: verified, issues.\n"
+            "verified deve ser boolean.\n"
+            "issues deve ser uma lista de strings curtas e concretas.\n"
+            "Nao inclua markdown, cercas de codigo ou texto fora do JSON."
+        )
+        answer_payload = {
+            "resposta_objetiva": objective,
+            "fundamentacao_juridica": foundation,
+        }
+
+        try:
+            response = self.chat_model.invoke(
+                [
+                    ("system", prompt),
+                    (
+                        "human",
+                        "Pergunta do usuario:\n"
+                        f"{question}\n\n"
+                        f"Resposta final: {json.dumps(answer_payload, ensure_ascii=False)}\n"
+                        f"Citacoes disponiveis: {json.dumps(self._build_citation_payload(citations, limit=12), ensure_ascii=False)}\n"
+                        f"Contexto recuperado: {json.dumps(self._build_context_payload(retrieved, limit=8, excerpt_chars=3200), ensure_ascii=False)}",
+                    ),
+                ]
+            )
+            payload = self._parse_json_payload(self._message_to_text(response))
+            verified = self._coerce_bool(payload.get("verified"), default=True)
+            issues = self._merge_unique(payload.get("issues"))
+            if not verified and not issues:
+                issues = [
+                    "A resposta final contem afirmacoes juridicas ou citacoes sem suporte verificavel nas fontes recuperadas."
+                ]
+            logger.info(
+                "Post-generation verification executed",
+                extra={
+                    "extra_payload": {
+                        "backend": self.active_backend,
+                        "verified": verified,
+                        "issues": issues,
+                    }
+                },
+            )
+            return AnswerVerification(executed=True, verified=verified, issues=issues, raw_payload=payload)
+        except Exception as exc:  # pragma: no cover
+            logger.warning(
+                "Post-generation verification failed.",
+                extra={"extra_payload": {"backend": self.active_backend, "error": str(exc)}},
+            )
+            return AnswerVerification()
 
     def summarize_text(self, text: str, *, mode: str = "resumo juridico") -> str:
         excerpt = text[:1200].strip()
@@ -85,35 +178,9 @@ class LegalLLMService:
         retrieved: list[RetrievedChunk],
         citations: list[Citation],
         limitations: list[str],
-    ) -> tuple[str, str, list[str], list[str]]:
-        context_payload = [
-            {
-                "title": item.chunk.title,
-                "source_type": item.chunk.source_type.value,
-                "authority": item.chunk.authority.value,
-                "is_official": item.chunk.is_official,
-                "content": item.chunk.content[:900],
-                "metadata": item.chunk.metadata.model_dump(mode="json"),
-                "scores": {
-                    "vector": round(item.vector_score, 4),
-                    "lexical": round(item.lexical_score, 4),
-                    "rerank": round(item.rerank_score, 4),
-                    "final": round(item.final_score, 4),
-                },
-            }
-            for item in retrieved[:5]
-        ]
-        citation_payload = [
-            {
-                "reference_label": citation.reference_label,
-                "quote": citation.quote,
-                "source_type": citation.source_type.value,
-                "authority": citation.authority.value,
-                "url": citation.url,
-                "metadata": citation.metadata,
-            }
-            for citation in citations[:8]
-        ]
+    ) -> GeneratedAnswer:
+        context_payload = self._build_context_payload(retrieved, limit=5, excerpt_chars=900)
+        citation_payload = self._build_citation_payload(citations, limit=8)
         prompt = (
             f"{MAIN_AGENT_SYSTEM_PROMPT.strip()}\n\n"
             f"{FINAL_RESPONSE_PROMPT.strip()}\n\n"
@@ -139,15 +206,29 @@ class LegalLLMService:
         payload = self._parse_json_payload(self._message_to_text(response))
         objective = self._safe_string(payload.get("resposta_objetiva"))
         foundation = self._safe_string(payload.get("fundamentacao_juridica"))
-        final_limitations = self._merge_unique(limitations, payload.get("limites"))
-        next_steps = self._merge_unique(payload.get("proximos_passos"))
 
         if not objective or not foundation:
             raise ValueError("Structured answer from chat model is incomplete.")
 
+        verification = self.verify_answer(
+            question=question,
+            objective=objective,
+            foundation=foundation,
+            retrieved=retrieved,
+            citations=citations,
+        )
+        final_limitations = self._merge_unique(limitations, payload.get("limites"), verification.issues)
+        next_steps = self._merge_unique(payload.get("proximos_passos"))
         if not next_steps:
             next_steps = self._next_steps(mode, citations)
-        return objective, foundation, final_limitations, next_steps
+
+        return GeneratedAnswer(
+            objective=objective,
+            foundation=foundation,
+            limitations=final_limitations,
+            next_steps=next_steps,
+            verification=verification,
+        )
 
     def _build_deterministic_answer(
         self,
@@ -156,7 +237,7 @@ class LegalLLMService:
         retrieved: list[RetrievedChunk],
         citations: list[Citation],
         limitations: list[str],
-    ) -> tuple[str, str, list[str], list[str]]:
+    ) -> GeneratedAnswer:
         if not retrieved:
             objective = "Nao encontrei base suficiente na colecao disponivel para responder com seguranca."
             foundation = (
@@ -167,7 +248,12 @@ class LegalLLMService:
                 "Informe a lei, artigo, tribunal ou contexto fatico especifico.",
                 "Envie o documento relevante, se a duvida depender de contrato, decisao ou notificacao.",
             ]
-            return objective, foundation, limitations, next_steps
+            return GeneratedAnswer(
+                objective=objective,
+                foundation=foundation,
+                limitations=limitations,
+                next_steps=next_steps,
+            )
 
         top = retrieved[:3]
         if mode == ResponseMode.FRIENDLY:
@@ -180,7 +266,51 @@ class LegalLLMService:
         foundation_lines.extend(f"- {item.chunk.title}: {item.chunk.content[:220]}" for item in top)
         foundation = "\n".join(foundation_lines)
         next_steps = self._next_steps(mode, citations)
-        return objective, foundation, limitations, next_steps
+        return GeneratedAnswer(
+            objective=objective,
+            foundation=foundation,
+            limitations=limitations,
+            next_steps=next_steps,
+        )
+
+    def _build_context_payload(
+        self,
+        retrieved: list[RetrievedChunk],
+        *,
+        limit: int,
+        excerpt_chars: int,
+    ) -> list[dict[str, Any]]:
+        return [
+            {
+                "title": item.chunk.title,
+                "source_type": item.chunk.source_type.value,
+                "authority": item.chunk.authority.value,
+                "is_official": item.chunk.is_official,
+                "content": item.chunk.content[:excerpt_chars],
+                "metadata": item.chunk.metadata.model_dump(mode="json"),
+                "scores": {
+                    "vector": round(item.vector_score, 4),
+                    "lexical": round(item.lexical_score, 4),
+                    "rerank": round(item.rerank_score, 4),
+                    "final": round(item.final_score, 4),
+                },
+            }
+            for item in retrieved[:limit]
+        ]
+
+    @staticmethod
+    def _build_citation_payload(citations: list[Citation], *, limit: int) -> list[dict[str, Any]]:
+        return [
+            {
+                "reference_label": citation.reference_label,
+                "quote": citation.quote,
+                "source_type": citation.source_type.value,
+                "authority": citation.authority.value,
+                "url": citation.url,
+                "metadata": citation.metadata,
+            }
+            for citation in citations[:limit]
+        ]
 
     @staticmethod
     def _friendly_summary(question: str, top: list[RetrievedChunk]) -> str:
@@ -231,6 +361,18 @@ class LegalLLMService:
                 if text and text not in merged:
                     merged.append(text)
         return merged
+
+    @staticmethod
+    def _coerce_bool(value: Any, *, default: bool) -> bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            lowered = value.strip().lower()
+            if lowered in {"true", "1", "yes", "sim"}:
+                return True
+            if lowered in {"false", "0", "no", "nao"}:
+                return False
+        return default
 
     @staticmethod
     def _message_to_text(message: Any) -> str:

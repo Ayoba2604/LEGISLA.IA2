@@ -80,6 +80,20 @@
       "max_records": 12
     }
   ],
+  "official_sumulas": [
+    {
+      "title": "Sumulas do Superior Tribunal de Justica",
+      "tribunal": "STJ",
+      "url": "https://www.stj.jus.br/docs_internet/SumulasSTJ.pdf",
+      "fallback_urls": [
+        "https://bdjur.stj.jus.br/jspui/bitstream/2011/113497/sumulas_stj.pdf"
+      ],
+      "ramo_direito": "jurisprudencia_superior",
+      "tema": "Sumulas do STJ",
+      "hierarchy": ["stj"],
+      "max_entries": 80
+    }
+  ],
   "datajud_queries": [
     {
       "enabled": false,
@@ -89,6 +103,7 @@
       "ramo_direito": "consumidor",
       "tema": "Metadados processuais publicos - consumidor",
       "max_records": 20,
+      "updated_since_days": 30,
       "payload": {
         "size": 20,
         "query": {
@@ -100,4 +115,3 @@
     }
   ]
 }
-
