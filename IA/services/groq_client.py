@@ -1,75 +1,79 @@
 import logging
+import os
+from typing import Optional
+
 from groq import Groq
 
+from env_loader import load_project_env
 
-GROQ_API_KEY = "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"
 
-client = Groq(api_key=GROQ_API_KEY)
+logger = logging.getLogger(__name__)
+load_project_env()
 
-logging.basicConfig(level=logging.INFO)
 
-def gerar_resposta_groq(pergunta: str, base_dados: list = None) -> str:
-    """
-    Pergunta a IA jurídica. Se base_dados for fornecida, ela é incluída no prompt.
-    """
+def _get_client() -> Optional[Groq]:
+    api_key = os.getenv("GROQ_API_KEY", "").strip()
+    if not api_key:
+        logger.warning("GROQ_API_KEY nao configurada; usando fallback local.")
+        return None
+    return Groq(api_key=api_key)
+
+
+def gerar_resposta_groq(pergunta: str, base_dados: list | None = None) -> str:
+    client = _get_client()
+    if client is None:
+        return ""
+    model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant").strip() or "llama-3.1-8b-instant"
+
     contexto = ""
-    if base_dados:
-        for item in base_dados:
-            if 'artigo' in item:
-                contexto += f"Artigo: {item['artigo']}\nTema: {item.get('tema','')}\nTexto: {item.get('texto','')}\nExplicação: {item.get('explicacao','')}\n\n"
-            elif 'descricao' in item:
-                contexto += f"Situação: {item['descricao']}\nAnálise: {item.get('analise','')}\n\n"
-            elif 'tipo' in item:
-                contexto += f"Contrato: {item['tipo']}\nAnálise: {item.get('analise','')}\n\n"
+    for item in base_dados or []:
+        contexto += f"{item}\n"
 
-    prompt = f"""
-Você é uma assistente jurídica virtual. Use o contexto abaixo para responder à pergunta.
-Contexto:
-{contexto}
+    prompt = (
+        "Voce e uma assistente juridica virtual. Use o contexto abaixo quando ele "
+        "for relevante e responda de forma clara, objetiva e educada.\n\n"
+        f"Contexto:\n{contexto or 'Sem contexto adicional.'}\n\n"
+        f"Pergunta do usuario: {pergunta}"
+    )
 
-Pergunta do usuário: {pergunta}
-Responda de forma clara, objetiva e educada.
-"""
     try:
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
-            model="llama-3.1-8b-instant"
+            model=model,
         )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        return f":(  Erro ao gerar resposta: {e}"
+    except Exception as exc:
+        logger.error("Erro ao gerar resposta com Groq: %s", exc, exc_info=True)
+        return ""
+
+    mensagem = getattr(response.choices[0].message, "content", "")
+    return mensagem.strip() if mensagem else ""
 
 
 def gerar_resumo_groq(texto: str, tipo: str = "resumo") -> str:
-    """
-    Gera um resumo ou resposta de forma estruturada usando LLaMA-3.1-8b-instant.
-    - texto: conteúdo a ser resumido ou interpretado
-    - tipo: tipo de resumo, por exemplo 'resumo de documento jurídico'
-    """
-    prompt = f"""
-Você é uma IA jurídica experiente. Sua tarefa é analisar o seguinte conteúdo
-e produzir um resumo ou resposta clara e estruturada em português, de acordo
-com o tipo solicitado: {tipo.upper()}.
+    client = _get_client()
+    if client is None:
+        return "Servico de IA indisponivel no momento."
+    model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant").strip() or "llama-3.1-8b-instant"
 
-Conteúdo:
-{texto}
-"""
+    prompt = (
+        "Voce e uma IA juridica experiente. Analise o conteudo abaixo e produza "
+        f"uma resposta em portugues no formato de {tipo}.\n\n"
+        f"Conteudo:\n{texto}"
+    )
 
     try:
         response = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
-            model="openai/gpt-oss-120b",
-            temperature=0.2, 
+            model=model,
+            temperature=0.2,
         )
-        
-        msg = getattr(response.choices[0].message, "content", "")
-        return msg.strip() if msg else "⚠️ Não foi possível gerar a resposta."
-    except Exception as e:
-        logging.error(f"Erro no Groq: {e}", exc_info=True)
-        return f"⚠️ Erro ao gerar resposta com Groq: {e}"
+    except Exception as exc:
+        logger.error("Erro no Groq: %s", exc, exc_info=True)
+        return "Nao foi possivel gerar a resposta com o servico de IA."
+
+    mensagem = getattr(response.choices[0].message, "content", "")
+    return mensagem.strip() if mensagem else "Nao foi possivel gerar a resposta."
+
 
 def gerar_resposta_generica_groq(texto: str) -> str:
-    """
-    Função genérica para pedir à IA que se apresente ou responda perguntas jurídicas.
-    """
-    return gerar_resumo_groq(texto, tipo="resposta teste")
+    return gerar_resumo_groq(texto, tipo="resposta")

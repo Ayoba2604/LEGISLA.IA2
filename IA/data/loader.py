@@ -1,40 +1,29 @@
 import json
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
-DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR = Path(__file__).resolve().parent
+
 
 def carregar_dados_json(caminho: Path) -> List[Dict]:
-    """
-    Carrega dados de um arquivo JSON especificado pelo caminho.
-
-    Args:
-        caminho (Path): O caminho completo para o arquivo JSON.
-
-    Returns:
-        List[Dict]: Uma lista de dicionários contendo os dados do JSON, ou uma lista vazia em caso de erro.
-    """
     try:
-        with open(caminho, "r", encoding="utf-8") as f:
-            return json.load(f)
+        with caminho.open("r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
     except FileNotFoundError:
-        print(f"Erro: Arquivo não encontrado em {caminho}")
+        print(f"Erro: arquivo nao encontrado em {caminho}")
         return []
     except json.JSONDecodeError:
-        print(f"Erro: Problema ao decodificar JSON em {caminho}. Verifique a formatação do arquivo.")
+        print(f"Erro: JSON invalido em {caminho}")
         return []
 
+    return dados if isinstance(dados, list) else []
+
+
 def segmentar_texto(texto: str, tamanho_max: int = 300) -> List[str]:
-    """
-    Segmenta um texto longo em blocos menores para busca semântica.
+    texto = (texto or "").strip()
+    if not texto:
+        return []
 
-    Args:
-        texto (str): Texto completo.
-        tamanho_max (int): Número máximo de caracteres por bloco.
-
-    Returns:
-        List[str]: Lista de blocos de texto.
-    """
     blocos = []
     palavras = texto.split()
     bloco_atual = []
@@ -50,43 +39,51 @@ def segmentar_texto(texto: str, tamanho_max: int = 300) -> List[str]:
 
     return blocos
 
-def carregar_base_segmentada(caminho: Path, tipo: str) -> List[Dict]:
-    """
-    Carrega dados do JSON e os segmenta em blocos menores.
 
-    Args:
-        caminho (Path): Caminho do arquivo JSON.
-        tipo (str): Tipo do dado (consulta, situacao, contrato).
+def _texto_para_busca(item: Dict) -> str:
+    campos = (
+        "artigo",
+        "tema",
+        "titulo",
+        "descricao",
+        "texto",
+        "explicacao",
+        "analise",
+        "tipo",
+    )
+    return " ".join(str(item.get(campo, "")).strip() for campo in campos if item.get(campo))
 
-    Returns:
-        List[Dict]: Lista de blocos segmentados com metadados.
-    """
+
+def carregar_base_segmentada(caminho: Path, categoria: str) -> List[Dict]:
     dados = carregar_dados_json(caminho)
     base_segmentada = []
 
     for item in dados:
-        texto = item.get("texto", "")
-        topico = item.get("tema", item.get("titulo", ""))
-        blocos = segmentar_texto(texto)
+        texto_integral = _texto_para_busca(item)
+        blocos = segmentar_texto(texto_integral) or [texto_integral]
+
         for idx, bloco in enumerate(blocos):
-            base_segmentada.append({
-                "id": f"{item.get('id', idx)}_{idx}",
-                "tipo": tipo,
-                "tema": topico,
-                "texto": bloco,
-                "original": texto,
-            })
+            base_segmentada.append(
+                {
+                    **item,
+                    "categoria": categoria,
+                    "tema": item.get("tema") or item.get("titulo") or item.get("descricao", ""),
+                    "texto": bloco,
+                    "original": texto_integral,
+                    "chunk_id": idx,
+                }
+            )
 
     return base_segmentada
 
+
 def carregar_artigos() -> List[Dict]:
-    """Carrega artigos jurídicos segmentados."""
     return carregar_base_segmentada(DATA_DIR / "base_juridica.json", "consulta")
 
+
 def carregar_situacoes() -> List[Dict]:
-    """Carrega situações jurídicas segmentadas."""
     return carregar_base_segmentada(DATA_DIR / "situacoes.json", "analise_situacao")
 
+
 def carregar_contratos() -> List[Dict]:
-    """Carrega contratos segmentados."""
     return carregar_base_segmentada(DATA_DIR / "contratos.json", "analise_contrato")

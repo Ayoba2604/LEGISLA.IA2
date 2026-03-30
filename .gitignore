@@ -1,2 +1,22 @@
 # Ambiente virtual Python
 .venv/
+venv/
+
+# Variaveis de ambiente
+
+
+# Claude
+.claude/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# React build
+public/react-home/
+frontend/dist/
+frontend/node_modules/
+
+# Environment
+.env
+.env.local

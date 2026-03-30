@@ -10,7 +10,7 @@ USE UsuariosLegislaIA;
 CREATE TABLE IF NOT EXISTS usuarios (
 	id_usuario BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(150) NOT NULL,
-	email VARCHAR(255) NOT NULL,
+	email VARCHAR(191) NOT NULL,
 	senha VARCHAR(255) NOT NULL,
 	admin TINYINT(1) NOT NULL DEFAULT 0,
 	criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,6 +23,6 @@ INSERT IGNORE INTO usuarios (nome, email, senha, admin)
 VALUES (
 	'Administrador',
 	'admin@legislaia.local',
-	'$2y$10$wH5i0Rr8Al2I7xw6Wn.mI.8u7wqjJmS5kVt8nP8qA3rN2YkN0JQ9K',
+	'$2y$10$vzJ4cRuOk9rd6F4noawLseEZrUgbLRod2yu1oNb43PM/XgCf0mYPq',
 	1
 );

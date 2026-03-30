@@ -3,7 +3,7 @@ import fitz
 import io
 import re
   
-from services.groq_client import gerar_resumo_groq
+from services.gemini_client import gerar_resumo_gemini
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -49,14 +49,24 @@ def eh_documento_juridico(texto: str) -> bool:
 
 
 
-def gerar_resumo_pdf(file_obj) -> dict:
-    """Extrai texto de um PDF e gera resumo via Groq."""
+def gerar_resumo_pdf(file_obj, prompt: str = "") -> dict:
+    """Extrai texto de um PDF e gera resumo via Gemini, com prompt opcional."""
     texto = ler_pdf(file_obj)
     if not texto:
-        return {"erro": "Não foi possível extrair texto do PDF."}
+        return {"erro": "Nao foi possivel extrair texto do PDF."}
 
-    tipo_resumo = "resumo de documento jurídico" if eh_documento_juridico(texto) else "resumo de documento geral"
-    logging.info(f"Gerando resumo com Groq para '{tipo_resumo}'...")
+    tipo_resumo = "resumo de documento juridico" if eh_documento_juridico(texto) else "resumo de documento geral"
 
-    resumo = gerar_resumo_groq(texto, tipo=tipo_resumo)
+    if prompt:
+        conteudo = (
+            f"Instrucao do usuario: {prompt}\n\n"
+            f"Documento PDF:\n{texto}"
+        )
+        tipo_resumo = "resposta baseada no documento"
+    else:
+        conteudo = texto
+
+    logging.info(f"Gerando resumo com Gemini para '{tipo_resumo}'...")
+
+    resumo = gerar_resumo_gemini(conteudo, tipo=tipo_resumo)
     return {"resumo": resumo}

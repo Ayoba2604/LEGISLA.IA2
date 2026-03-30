@@ -20,6 +20,11 @@ class UsuarioController {
             return 'Por favor, insira um email valido!';
         }
 
+        $existente = $this->model->getUsuarioPorEmail($email);
+        if ($existente) {
+            return 'Este email ja esta cadastrado.';
+        }
+
         $sucesso = $this->model->criarUsuario($nome, $email, $senha);
 
         if ($sucesso) {
@@ -29,7 +34,7 @@ class UsuarioController {
                 $_SESSION['id'] = $usuario['id_usuario'];
                 $_SESSION['usuario'] = $usuario['nome'];
                 $_SESSION['email'] = $usuario['email'];
-                $_SESSION['admin'] = $usuario['admin'];
+                $_SESSION['admin'] = (bool) $usuario['admin'];
             }
             return true;
         }
@@ -48,7 +53,7 @@ class UsuarioController {
             $_SESSION['statusLogado'] = true;
             $_SESSION['usuario'] = $login['nome'];
             $_SESSION['email'] = $login['email'];
-            $_SESSION['admin'] = $login['admin'];
+            $_SESSION['admin'] = (bool) $login['admin'];
 
             return true;
         }

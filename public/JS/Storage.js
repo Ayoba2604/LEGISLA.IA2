@@ -1,17 +1,19 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('toggle-theme');
-  const html = document.documentElement;
+// Aplica tema imediatamente (antes do DOMContentLoaded) para evitar flash sem estilo
+(function() {
+  var saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+
+window.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.getElementById('toggle-theme');
   if (!toggle) return;
 
-  // Verifica o tema salvo
-  const savedTheme = localStorage.getItem('theme');
-  const initialTheme = savedTheme || 'light';
-  html.setAttribute('data-theme', initialTheme);
-  toggle.checked = initialTheme === 'dark';
+  var theme = localStorage.getItem('theme') || 'light';
+  toggle.checked = theme === 'dark';
 
-  toggle.addEventListener('change', () => {
-    const theme = toggle.checked ? 'dark' : 'light';
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+  toggle.addEventListener('change', function() {
+    var t = toggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
   });
 });

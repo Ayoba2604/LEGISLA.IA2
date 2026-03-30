@@ -1,20 +1,49 @@
-from data.loader import carregar_artigos, carregar_situacoes, carregar_contratos
-from typing import Optional, List, Dict
+from typing import Dict, List
+
+from data.loader import carregar_artigos, carregar_contratos, carregar_situacoes
+
+
+def _contem_termo(valor: object, termo: str) -> bool:
+    return termo in str(valor or "").lower()
+
 
 def buscar_por_artigo(artigo: str, tipo: str = "consulta") -> List[Dict]:
+    termo = (artigo or "").strip().lower()
+    if not termo:
+        return []
+
     dados = _carregar_dados_por_tipo(tipo)
-    return [item for item in dados if artigo.lower() in item.get("artigo", "").lower()]
+    return [
+        item
+        for item in dados
+        if any(
+            _contem_termo(item.get(campo), termo)
+            for campo in ("artigo", "id", "titulo", "tema", "descricao")
+        )
+    ]
+
 
 def buscar_por_tema(tema: str, tipo: str = "consulta") -> List[Dict]:
+    termo = (tema or "").strip().lower()
+    if not termo:
+        return []
+
     dados = _carregar_dados_por_tipo(tipo)
-    return [item for item in dados if tema.lower() in item.get("tema", "").lower()]
+    return [
+        item
+        for item in dados
+        if any(
+            _contem_termo(item.get(campo), termo)
+            for campo in ("tema", "titulo", "descricao", "texto", "analise", "original")
+        )
+    ]
+
 
 def _carregar_dados_por_tipo(tipo: str) -> List[Dict]:
     if tipo == "consulta":
         return carregar_artigos()
-    elif tipo == "analise_situacao":
+    if tipo == "analise_situacao":
         return carregar_situacoes()
-    elif tipo == "analise_contrato":
+    if tipo == "analise_contrato":
         return carregar_contratos()
     return []
-

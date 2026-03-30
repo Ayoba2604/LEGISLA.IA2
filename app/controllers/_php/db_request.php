@@ -1,4 +1,7 @@
-﻿<?php
+<?php
+
+require_once __DIR__ . '/env_loader.php';
+legislaLoadEnv();
 
 if (!function_exists('legislaBuildDbConfig')) {
     function legislaBuildDbConfig(): array

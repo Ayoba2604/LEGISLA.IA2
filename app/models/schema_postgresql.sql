@@ -23,7 +23,7 @@ INSERT INTO usuarios (nome, email, senha, admin)
 VALUES (
     'Administrador',
     'admin@legislaia.local',
-    '$2y$10$wH5i0Rr8Al2I7xw6Wn.mI.8u7wqjJmS5kVt8nP8qA3rN2YkN0JQ9K',
+    '$2y$10$vzJ4cRuOk9rd6F4noawLseEZrUgbLRod2yu1oNb43PM/XgCf0mYPq',
     TRUE
 )
 ON CONFLICT (email) DO NOTHING;

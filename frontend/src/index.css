@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg-canvas: #f5efe4;
+  --bg-surface: rgba(255, 255, 255, 0.82);
+  --bg-surface-strong: #ffffff;
+  --bg-soft: #ebe4d6;
+  --bg-accent: #0d5c63;
+  --bg-accent-soft: #d9f0ed;
+  --text-primary: #102542;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+  --border: rgba(16, 37, 66, 0.12);
+  --border-strong: rgba(13, 92, 99, 0.24);
+  --shadow-card: 0 24px 60px rgba(16, 37, 66, 0.12);
+  --shadow-soft: 0 18px 42px rgba(16, 37, 66, 0.08);
+  --heading-font: 'Sora', sans-serif;
+  --body-font: 'Manrope', sans-serif;
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-canvas: #081319;
+  --bg-surface: rgba(10, 22, 30, 0.82);
+  --bg-surface-strong: #10212a;
+  --bg-soft: #122935;
+  --bg-accent: #58b9a8;
+  --bg-accent-soft: rgba(88, 185, 168, 0.14);
+  --text-primary: #eff6ff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #03131a;
+  --border: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(88, 185, 168, 0.3);
+  --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.34);
+  --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg-canvas);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--body-font);
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at top left, rgba(13, 92, 99, 0.16), transparent 26%),
+    radial-gradient(circle at top right, rgba(208, 183, 124, 0.28), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 30%),
+    var(--bg-canvas);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}

@@ -1,7 +1,7 @@
 import re
 import unicodedata
 import logging
-from services.groq_client import gerar_resposta_generica_groq
+from services.gemini_client import gerar_resposta_generica_gemini
 
 def normalizar_texto(texto: str) -> str:
     """
@@ -21,26 +21,10 @@ def normalizar_texto(texto: str) -> str:
     return texto
 
 def gerar_resposta(texto: str) -> str:
-    """
-    Gera a resposta usando Groq.
-    Sempre considera que o modelo é uma IA jurídica.
-    """
-    texto_norm = normalizar_texto(texto)
+    """Gera a resposta usando Gemini com system instruction."""
     try:
-        prompt = f"""
-        Você é uma assistente jurídica virtual, especializada em direito brasileiro. 
-        Seu papel é responder de forma clara, educada e objetiva, adaptando o tom de acordo com a situação:
-
-        1. Se o usuário fizer uma saudação ou comentário informal (como "oi", "olá", "como vai?"), responda cordialmente de forma breve e amigável.
-        2. Se o usuário fizer uma pergunta jurídica, forneça uma resposta detalhada, explicativa e precisa, baseada na legislação brasileira.
-        3. Sempre use linguagem acessível e clara, evitando termos excessivamente técnicos quando possível.
-        4. Se não houver informações suficientes para responder juridicamente, explique de forma educada que precisa de mais contexto.
-
-        Pergunta do usuário: "{texto_norm}"
-        Responda como uma assistente jurídica virtual profissional, mantendo-se clara, objetiva e cordial.
-        """
-        resposta = gerar_resposta_generica_groq(prompt)
+        resposta = gerar_resposta_generica_gemini(texto)
         return resposta.strip()
     except Exception as e:
-        logging.error(f"Erro ao gerar resposta com Groq: {e}")
-        return "Desculpe, não consegui processar sua pergunta no momento."
+        logging.error(f"Erro ao gerar resposta com Gemini: {e}")
+        return "Desculpe, nao consegui processar sua pergunta no momento."

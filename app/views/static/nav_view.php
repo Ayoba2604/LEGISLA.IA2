@@ -22,8 +22,8 @@ function renderNavItem(string $itemKey, string $currentView, string $href, strin
         <?php renderNavItem('home', $currentView, '../../../public/index.php', 'Home'); ?>
 
         <?php if (!empty($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true): ?>
-            <?php if (!empty($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
-                <?php renderNavItem('central', $currentView, '../auth/centralDeControle.php', 'Central de Controle'); ?>
+            <?php if (!empty($_SESSION['admin'])): ?>
+                <?php renderNavItem('central', $currentView, '../../../public/index.php?route=admin/dashboard', 'Dashboard Admin'); ?>
             <?php else: ?>
                 <?php renderNavItem('perfil', $currentView, '../auth/perfil.php', 'Perfil'); ?>
             <?php endif; ?>
@@ -51,7 +51,6 @@ function renderNavItem(string $itemKey, string $currentView, string $href, strin
     </ul>
     </div>
 </header>
-
 
 
 
