@@ -1,11 +1,11 @@
 const team = [
-  { name: 'Joao Miranda', role: 'Designer Grafico', img: '/imagens/Joao.png' },
-  { name: 'Alan Nunes', role: 'Desenvolvedor Full Stack', img: '/imagens/alan.jpeg' },
+  { name: 'Joao Miranda', role: 'Designer', img: '/imagens/Joao.png' },
+  { name: 'Alan Nunes', role: 'Dev Full Stack', img: '/imagens/alan.jpeg' },
   { name: 'Bruno Deanin', role: 'Gerente de Projetos - Desenvolvedor Web', img: '/imagens/Bruno.png' },
   { name: 'Caio Bueno', role: 'Desenvolvedor BackEnd', img: '/imagens/Caio.jpeg' },
-  { name: 'Ana Julia', role: 'Desenvolvedora Full Stack', img: '/imagens/anajulia.jpg' },
-  { name: 'Kelven', role: 'Desenvolvedor Full Stack', img: '/imagens/kelven.jpg' },
-  { name: 'Lara Botin', role: 'Designer', img: '/imagens/lara.jpg' },
+  { name: 'Ana Julia', role: 'Administrativo', img: '/imagens/anajulia.jpg' },
+  { name: 'Kelven', role: 'Videomaker', img: '/imagens/kelven.jpg' },
+  { name: 'Lara Botin', role: 'Auxiliar-Administrativo', img: '/imagens/lara.jpg' },
 ]
 
 export default function AboutPage() {
