@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "titulo": "Contrato de trabalho",
+    "descricao": "Contrato de trabalho entre empregado e empregador",
+    "analise": "Deve prever funções, jornada, salário, benefícios e condições de rescisão para evitar nulidades.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 2,
+    "titulo": "Contrato de locação",
+    "descricao": "Contrato de locação de imóvel",
+    "analise": "Deve conter cláusulas sobre valor do aluguel, prazo, reajustes, garantias, obrigações das partes e penalidades por descumprimento.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 3,
+    "titulo": "Contrato de prestação de serviços",
+    "descricao": "Contrato para prestação de serviços",
+    "analise": "Especificar objeto, prazo, valor, responsabilidades e condições de rescisão, prevenindo litígios.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 4,
+    "titulo": "Contrato de compra e venda",
+    "descricao": "Contrato de compra e venda de bens ou imóveis",
+    "analise": "Detalhar produto/imóvel, preço, pagamento, prazos de entrega, garantias e cláusulas de resolução de conflitos.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 5,
+    "titulo": "Contrato de comodato",
+    "descricao": "Contrato gratuito de empréstimo de bens",
+    "analise": "Estipular prazo de devolução, condições de uso e responsabilidades para conservação do bem.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 6,
+    "titulo": "Contrato de confidencialidade",
+    "descricao": "Contrato de sigilo e confidencialidade",
+    "analise": "Define obrigações de sigilo, penalidades em caso de violação, muito usado em relações comerciais e tecnológicas.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 7,
+    "titulo": "Contrato de sociedade",
+    "descricao": "Contrato regulando sociedade entre sócios",
+    "analise": "Define participação, responsabilidades, divisão de lucros e regras para dissolução da sociedade.",
+    "tipo": "contrato"
+  },
+  {
+    "id": 8,
+    "titulo": "Contrato de franquia",
+    "descricao": "Contrato de franquia comercial",
+    "analise": "Estabelece direitos e deveres do franqueador e franqueado, incluindo uso de marca, suporte técnico, royalties e padrão de operação.",
+    "tipo": "contrato"
+  }
+]

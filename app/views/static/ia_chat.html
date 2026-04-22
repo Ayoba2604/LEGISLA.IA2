@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legisla.IA | Assistente Juridico</title>
+    <link rel="icon" href="../../../public/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../../public/favicon-96x96.png" type="image/png" sizes="96x96">
+    <link rel="icon" href="../../../public/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../public/apple-touch-icon.png">
+    <link rel="manifest" href="../../../public/site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../../assets/css/styleia.css">
+</head>
+<body>
+
+<button id="open-sidebar" class="floating-btn" aria-label="Abrir menu">
+    <i class="bi bi-layout-sidebar-inset"></i>
+</button>
+
+<aside id="sidebar" class="closed">
+    <div class="sidebar-top">
+        <div class="sidebar-brand">
+            <img src="../../../public/favicon.svg" alt="Legisla.IA" class="brand-logo">
+            <div>
+                <h2>Legisla.IA</h2>
+                <span class="brand-tag">Assistente Juridico</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-actions">
+        <button id="new-chat-btn"><i class="bi bi-plus-lg"></i> Nova conversa</button>
+    </div>
+
+    <div class="sidebar-history" id="sidebar-history">
+        <small class="history-label">Conversas recentes</small>
+        <div class="history-empty">
+            <i class="bi bi-chat-left-text"></i>
+            <span>Nenhuma conversa ainda</span>
+        </div>
+    </div>
+
+    <div class="sidebar-foot">
+        <button id="config-btn" class="config-toggle"><i class="bi bi-gear"></i> Configuracoes</button>
+        <div id="settings-popover" class="settings-popover" hidden>
+            <strong class="settings-title">Aparencia</strong>
+            <div class="theme-options">
+                <button type="button" class="settings-theme-option" data-theme="light">
+                    <i class="bi bi-sun"></i> Claro
+                </button>
+                <button type="button" class="settings-theme-option" data-theme="dark">
+                    <i class="bi bi-moon-stars"></i> Escuro
+                </button>
+            </div>
+        </div>
+        <a href="../../../public/index.php" class="back-link"><i class="bi bi-arrow-left"></i> Voltar ao inicio</a>
+        <div class="status-bar">
+            <span class="status-dot" id="ia-status-dot"></span>
+            <span id="ia-status-text">Verificando...</span>
+        </div>
+    </div>
+    <input type="checkbox" id="toggle-theme" hidden>
+</aside>
+
+<main id="chat-container">
+    <div class="chat-head">
+        <div class="chat-head-left">
+            <img src="../../../public/favicon.svg" alt="Legisla.IA" class="chat-avatar-head">
+            <div>
+                <h1>Assistente Juridico</h1>
+                <p>Legisla.IA &mdash; linguagem simples, direito acessivel</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="messages">
+        <div class="welcome-screen" id="welcome-screen">
+            <img src="../../../public/favicon.svg" alt="Legisla.IA" class="welcome-logo">
+            <h2>Ola! Sou o Legisla.IA</h2>
+            <p>Seu assistente juridico com linguagem simples. Pergunte sobre direitos trabalhistas, do consumidor, familia e muito mais.</p>
+            <div class="prompt-grid" id="prompt-list">
+                <button class="prompt-card" data-prompt="Posso faltar ao trabalho com atestado?">
+                    <i class="bi bi-briefcase"></i>
+                    <div>
+                        <strong>Atestado no trabalho</strong>
+                        <span>Posso faltar ao trabalho com atestado?</span>
+                    </div>
+                </button>
+                <button class="prompt-card" data-prompt="Quais sao meus direitos em uma compra com defeito?">
+                    <i class="bi bi-bag-check"></i>
+                    <div>
+                        <strong>Compra com defeito</strong>
+                        <span>Quais sao meus direitos?</span>
+                    </div>
+                </button>
+                <button class="prompt-card" data-prompt="Como funciona pensao alimenticia no Brasil?">
+                    <i class="bi bi-people"></i>
+                    <div>
+                        <strong>Pensao alimenticia</strong>
+                        <span>Como funciona no Brasil?</span>
+                    </div>
+                </button>
+                <button class="prompt-card" data-prompt="Quais sao meus direitos ao ser demitido sem justa causa?">
+                    <i class="bi bi-shield-check"></i>
+                    <div>
+                        <strong>Demissao sem justa causa</strong>
+                        <span>Quais sao meus direitos?</span>
+                    </div>
+                </button>
+                <button class="prompt-card" data-prompt="Como funciona o processo de divorcio no Brasil?">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <div>
+                        <strong>Divorcio</strong>
+                        <span>Como funciona o processo?</span>
+                    </div>
+                </button>
+                <button class="prompt-card" data-prompt="Meu vizinho esta fazendo barulho excessivo. O que posso fazer?">
+                    <i class="bi bi-house"></i>
+                    <div>
+                        <strong>Direito de vizinhanca</strong>
+                        <span>Barulho excessivo, o que fazer?</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="input-area">
+        <div id="pdf-preview" class="pdf-preview" hidden>
+            <i class="bi bi-file-earmark-pdf-fill"></i>
+            <span id="pdf-filename"></span>
+            <button id="pdf-remove" type="button" title="Remover PDF"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="input-row">
+            <textarea id="input-text" placeholder="Digite sua pergunta juridica..." rows="1"></textarea>
+            <div class="input-actions">
+                <label for="pdf-input" class="icon-btn" title="Anexar PDF">
+                    <i class="bi bi-paperclip"></i>
+                </label>
+                <input id="pdf-input" type="file" accept="application/pdf">
+                <button id="send-btn" title="Enviar"><i class="bi bi-arrow-up"></i></button>
+            </div>
+        </div>
+        <span class="input-hint">Legisla.IA pode cometer erros. Consulte sempre um advogado para orientacao profissional.</span>
+    </div>
+</main>
+
+<script src="../../../public/JS/Storage.js"></script>
+<script src="../../../public/JS/env.js"></script>
+<script src="../../../public/JS/script.js"></script>
+</body>
+</html>
